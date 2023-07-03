@@ -9,11 +9,9 @@ class PawnTest {
     @Test
     @DisplayName("흰색 폰이 생성되어야 한다")
     public void create() {
-        // given, when
         final String WHITE = "white";
         final String BLACK = "black";
 
-        // then
         verifyPawn(WHITE);
         verifyPawn(BLACK);
     }
