@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import softeer2nd.pieces.Pawn;
+import softeer2nd.utils.StringUtils;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -46,7 +47,6 @@ class BoardTest {
     @Test
     @DisplayName("체스판 초기화 후 Pawn이 잘 들어갔는지 확인한다")
     public void initialize(){
-
         assertAll(
                 () -> assertEquals("pppppppp", board.getWhitePawnsResults()),
                 () -> assertEquals("PPPPPPPP", board.getBlackPawnsResults())

@@ -1,6 +1,7 @@
 package softeer2nd.chess;
 
 import softeer2nd.pieces.Pawn;
+import softeer2nd.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +74,7 @@ public class Board {
                 for(Pawn pawn : row)
                     sb.append(pawn.getRepresentation());
             }
-            sb.append("\n");
+            sb.append(StringUtils.appendNewLine(""));
         }
 
         return sb.toString();
