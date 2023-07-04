@@ -16,9 +16,10 @@ class BoardTest {
     @BeforeEach
     public void init() {
         board = new Board();
+        board.initialize();
 
-        white = new Pawn(Pawn.WHITE_COLOR);
-        black = new Pawn(Pawn.BLACK_COLOR);
+        white = new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION);
+        black = new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION);
     }
 
     @Nested
@@ -40,5 +41,21 @@ class BoardTest {
         public void create_NotPawn() {
 //            board.add(new Integer("7")); // 컴파일 에러
         }
+    }
+
+    @Test
+    @DisplayName("체스판 초기화 후 Pawn이 잘 들어갔는지 확인한다")
+    public void initialize(){
+
+        assertAll(
+                () -> assertEquals("pppppppp", board.getWhitePawnsResults()),
+                () -> assertEquals("PPPPPPPP", board.getBlackPawnsResults())
+        );
+    }
+
+    @Test
+    @DisplayName("보드를 출력한다")
+    public void print(){
+        board.print();
     }
 }
