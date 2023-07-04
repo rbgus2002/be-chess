@@ -3,21 +3,23 @@ package softeer2nd.pieces;
 import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class PieceTest {
     @Nested
     class create{
         @Test
-        @DisplayName("흰색 / 검은색 Pawn을 생성한다")
-        public void create() {
-            verifyPawn(Piece.WHITE_COLOR);
-            verifyPawn(Piece.BLACK_COLOR);
+        @DisplayName("pawn을 생성한다")
+        public void createPawn(){
+            verifyPiece(Piece.createWhitePawn(), Piece.WHITE_COLOR, Piece.WHITE_PAWN_REPRESENTATION);
+            verifyPiece(Piece.createBlackPawn(), Piece.BLACK_COLOR, Piece.BLACK_PAWN_REPRESENTATION);
         }
 
-        private void verifyPawn(final String color){
-            Piece piece = Piece.init("pawn", color);
-            assertThat(piece.getColor()).isEqualTo(color);
+        private void verifyPiece(final Piece piece, final String color, final Character representation){
+            assertEquals(color, piece.getColor());
+            assertEquals(representation, piece.getRepresentation());
         }
     }
 }

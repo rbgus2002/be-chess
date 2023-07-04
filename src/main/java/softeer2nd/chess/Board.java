@@ -28,10 +28,10 @@ public class Board {
 
     public Board() {
         for(int i = 0 ; i < SIZE; i++){
-            whitePawnsResults.add(Piece.init("pawn", Piece.WHITE_COLOR));
+            whitePawnsResults.add(Piece.createWhitePawn());
         }
         for(int i = 0 ; i < SIZE; i++){
-            blackPawnsResults.add(Piece.init("pawn", Piece.BLACK_COLOR));
+            blackPawnsResults.add(Piece.createBlackPawn());
         }
     }
 
