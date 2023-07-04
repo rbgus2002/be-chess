@@ -4,23 +4,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import softeer2nd.pieces.Pawn;
-import softeer2nd.utils.StringUtils;
+import softeer2nd.pieces.Piece;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
     Board board;
-    Pawn white;
-    Pawn black;
+    Piece white;
+    Piece black;
 
     @BeforeEach
     public void init() {
         board = new Board();
         board.initialize();
 
-        white = new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION);
-        black = new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION);
+        white = Piece.init("pawn", Piece.WHITE_COLOR);
+        black = Piece.init("pawn", Piece.BLACK_COLOR);
     }
 
     @Nested

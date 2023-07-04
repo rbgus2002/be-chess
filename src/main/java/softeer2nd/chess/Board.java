@@ -1,6 +1,6 @@
 package softeer2nd.chess;
 
-import softeer2nd.pieces.Pawn;
+import softeer2nd.pieces.Piece;
 import softeer2nd.utils.StringUtils;
 
 import java.util.ArrayList;
@@ -9,29 +9,29 @@ import java.util.List;
 public class Board {
     private final int SIZE = 8;
 
-    List<Pawn> pawnList = new ArrayList<>();
-    List<List<Pawn>> board = new ArrayList<>();
-    List<Pawn> whitePawnsResults = new ArrayList<>();
-    List<Pawn> blackPawnsResults = new ArrayList<>();
+    List<Piece> pieceList = new ArrayList<>();
+    List<List<Piece>> board = new ArrayList<>();
+    List<Piece> whitePawnsResults = new ArrayList<>();
+    List<Piece> blackPawnsResults = new ArrayList<>();
 
     public int size() {
-        return pawnList.size();
+        return pieceList.size();
     }
 
-    public void add(Pawn pawn) {
-        pawnList.add(pawn);
+    public void add(Piece piece) {
+        pieceList.add(piece);
     }
 
-    public Pawn findPawn(int idx) {
-        return pawnList.get(idx);
+    public Piece findPawn(int idx) {
+        return pieceList.get(idx);
     }
 
     public Board() {
         for(int i = 0 ; i < SIZE; i++){
-            whitePawnsResults.add(new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION));
+            whitePawnsResults.add(Piece.init("pawn", Piece.WHITE_COLOR));
         }
         for(int i = 0 ; i < SIZE; i++){
-            blackPawnsResults.add(new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION));
+            blackPawnsResults.add(Piece.init("pawn", Piece.BLACK_COLOR));
         }
     }
 
@@ -48,15 +48,15 @@ public class Board {
 
     public String getWhitePawnsResults() {
         StringBuilder sb = new StringBuilder();
-        for(Pawn pawn : whitePawnsResults)
-            sb.append(pawn);
+        for(Piece piece : whitePawnsResults)
+            sb.append(piece);
         return sb.toString();
     }
 
     public String getBlackPawnsResults() {
         StringBuilder sb = new StringBuilder();
-        for(Pawn pawn : blackPawnsResults)
-            sb.append(pawn);
+        for(Piece piece : blackPawnsResults)
+            sb.append(piece);
         return sb.toString();
     }
 
@@ -67,12 +67,12 @@ public class Board {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for(List<Pawn> row : board){
+        for(List<Piece> row : board){
             if(row.isEmpty()){
                 sb.append("********");
             }else{
-                for(Pawn pawn : row)
-                    sb.append(pawn.getRepresentation());
+                for(Piece piece : row)
+                    sb.append(piece);
             }
             sb.append(StringUtils.appendNewLine(""));
         }
