@@ -3,32 +3,31 @@ package softeer2nd.pieces;
 public class Piece {
     private String name; //  pawn, knight, rook, bishop, queen, king
     private String color;
-    private Character representation;
 
     public final static String WHITE_COLOR = "white";
     public final static String BLACK_COLOR = "black";
-    public final static Character WHITE_PAWN_REPRESENTATION = 'p';
-    public final static Character BLACK_PAWN_REPRESENTATION = 'P';
+
+    public final static String PAWN = "pawn";
+
 
     private Piece() {
     }
 
-    private Piece(String name, String color, Character representation) {
+    private Piece(String name, String color) {
         this.name = name;
         this.color = color;
-        this.representation = representation;
     }
 
-    public static Piece init(String name, String color, Character representation) {
-        return new Piece(name, color, representation);
+    public static Piece init(String name, String color) {
+        return new Piece(name, color);
     }
 
     public static Piece createWhitePawn(){
-        return init("pawn", WHITE_COLOR, WHITE_PAWN_REPRESENTATION);
+        return init(PAWN, WHITE_COLOR);
     }
 
     public static Piece createBlackPawn() {
-        return init("pawn", BLACK_COLOR, BLACK_PAWN_REPRESENTATION);
+        return init(PAWN, BLACK_COLOR);
     }
 
     public String getColor() {
@@ -40,13 +39,20 @@ public class Piece {
     }
 
     public Character getRepresentation() {
-        return representation;
+        char ch = this.name.charAt(0);
+        if(color.equals(WHITE_COLOR)){
+            ch = Character.toLowerCase(ch);
+        }else{
+            ch = Character.toUpperCase(ch);
+        }
+
+        return ch;
     }
 
     @Override
     public String toString() {
         char ch = this.name.charAt(0);
-        if(color.equals("white")){
+        if(color.equals(WHITE_COLOR)){
             ch = Character.toLowerCase(ch);
         }else{
             ch = Character.toUpperCase(ch);

@@ -11,15 +11,15 @@ class PieceTest {
     @Nested
     class create{
         @Test
-        @DisplayName("pawn을 생성한다")
+        @DisplayName("Piece를 생성한다")
         public void createPawn(){
-            verifyPiece(Piece.createWhitePawn(), Piece.WHITE_COLOR, Piece.WHITE_PAWN_REPRESENTATION);
-            verifyPiece(Piece.createBlackPawn(), Piece.BLACK_COLOR, Piece.BLACK_PAWN_REPRESENTATION);
+            verifyPiece(Piece.createWhitePawn(), Piece.WHITE_COLOR, Piece.PAWN);
+            verifyPiece(Piece.createBlackPawn(), Piece.BLACK_COLOR, Piece.PAWN);
         }
 
-        private void verifyPiece(final Piece piece, final String color, final Character representation){
+        private void verifyPiece(final Piece piece, final String color, final String name){
             assertEquals(color, piece.getColor());
-            assertEquals(representation, piece.getRepresentation());
+            assertEquals(name, piece.getName());
         }
     }
 }
