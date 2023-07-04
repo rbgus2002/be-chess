@@ -26,15 +26,11 @@ class BoardTest {
         @Test
         @DisplayName("체스판에 Pawn을 추가한다")
         public void create() {
-            // given
-
-            // when
             board.add(white);
-            board.add(black);
-
-            // then
             assertEquals(1, board.size());
             assertEquals(white, board.findPawn(0));
+
+            board.add(black);
             assertEquals(2, board.size());
             assertEquals(black, board.findPawn(1));
         }
