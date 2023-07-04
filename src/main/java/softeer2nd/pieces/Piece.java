@@ -51,13 +51,6 @@ public class Piece {
 
     @Override
     public String toString() {
-        char ch = this.name.charAt(0);
-        if(color.equals(WHITE_COLOR)){
-            ch = Character.toLowerCase(ch);
-        }else{
-            ch = Character.toUpperCase(ch);
-        }
-
-        return Character.toString(ch);
+        return getRepresentation().toString();
     }
 }
