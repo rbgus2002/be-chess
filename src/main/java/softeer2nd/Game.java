@@ -17,7 +17,7 @@ public class Game {
             if(!verifyInput(input))
                 break;
 
-            board.print();
+            board.showBoard();
         }
     }
 

@@ -8,6 +8,11 @@ public class Piece {
     public final static String BLACK_COLOR = "black";
 
     public final static String PAWN = "pawn";
+    public final static String KNIGHT = "knight";
+    public final static String ROOK = "rook";
+    public final static String BISHOP = "bishop";
+    public final static String QUEEN = "queen";
+    public final static String KING = "king";
 
 
     private Piece() {
@@ -22,12 +27,52 @@ public class Piece {
         return new Piece(name, color);
     }
 
-    public static Piece createWhitePawn(){
+    public static Piece createWhitePawn() {
         return init(PAWN, WHITE_COLOR);
     }
 
     public static Piece createBlackPawn() {
         return init(PAWN, BLACK_COLOR);
+    }
+
+    public static Piece createWhiteKnight() {
+        return init(KNIGHT, WHITE_COLOR);
+    }
+
+    public static Piece createBlackKnight() {
+        return init(KNIGHT, BLACK_COLOR);
+    }
+
+    public static Piece createWhiteRook() {
+        return init(ROOK, WHITE_COLOR);
+    }
+
+    public static Piece createBlackRook() {
+        return init(ROOK, BLACK_COLOR);
+    }
+
+    public static Piece createWhiteBishop() {
+        return init(BISHOP, WHITE_COLOR);
+    }
+
+    public static Piece createBlackBishop() {
+        return init(BISHOP, BLACK_COLOR);
+    }
+
+    public static Piece createWhiteQueen() {
+        return init(QUEEN, WHITE_COLOR);
+    }
+
+    public static Piece createBlackQueen() {
+        return init(QUEEN, BLACK_COLOR);
+    }
+
+    public static Piece createWhiteKing() {
+        return init(KING, WHITE_COLOR);
+    }
+
+    public static Piece createBlackKing() {
+        return init(KING, BLACK_COLOR);
     }
 
     public String getColor() {
@@ -39,10 +84,10 @@ public class Piece {
     }
 
     public Character getRepresentation() {
-        char ch = this.name.charAt(0);
-        if(color.equals(WHITE_COLOR)){
+        char ch = (!this.name.equals(KNIGHT) ? this.name.charAt(0) : this.name.charAt(1));
+        if (color.equals(WHITE_COLOR)) {
             ch = Character.toLowerCase(ch);
-        }else{
+        } else {
             ch = Character.toUpperCase(ch);
         }
 

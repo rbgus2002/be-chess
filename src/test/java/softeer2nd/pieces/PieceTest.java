@@ -15,11 +15,53 @@ class PieceTest {
         public void createPawn(){
             verifyPiece(Piece.createWhitePawn(), Piece.WHITE_COLOR, Piece.PAWN);
             verifyPiece(Piece.createBlackPawn(), Piece.BLACK_COLOR, Piece.PAWN);
-        }
 
-        private void verifyPiece(final Piece piece, final String color, final String name){
-            assertEquals(color, piece.getColor());
-            assertEquals(name, piece.getName());
+            verifyPiece(Piece.createWhiteKnight(), Piece.WHITE_COLOR, Piece.KNIGHT);
+            verifyPiece(Piece.createBlackKnight(), Piece.BLACK_COLOR, Piece.KNIGHT);
+
+            verifyPiece(Piece.createWhiteRook(), Piece.WHITE_COLOR, Piece.ROOK);
+            verifyPiece(Piece.createBlackRook(), Piece.BLACK_COLOR, Piece.ROOK);
+
+            verifyPiece(Piece.createWhiteBishop(), Piece.WHITE_COLOR, Piece.BISHOP);
+            verifyPiece(Piece.createBlackBishop(), Piece.BLACK_COLOR, Piece.BISHOP);
+
+            verifyPiece(Piece.createWhiteQueen(), Piece.WHITE_COLOR, Piece.QUEEN);
+            verifyPiece(Piece.createBlackQueen(), Piece.BLACK_COLOR, Piece.QUEEN);
+
+            verifyPiece(Piece.createWhiteKing(), Piece.WHITE_COLOR, Piece.KING);
+            verifyPiece(Piece.createBlackKing(), Piece.BLACK_COLOR, Piece.KING);
         }
+    }
+
+    @Test
+    @DisplayName("Piece가 가지는 말의 representation을 출력한다")
+    public void getRepresentation(){
+        verifyRepresentation(Piece.createWhitePawn(), 'p');
+        verifyRepresentation(Piece.createBlackPawn(), 'P');
+
+        verifyRepresentation(Piece.createWhiteKnight(), 'n');
+        verifyRepresentation(Piece.createBlackKnight(), 'N');
+
+        verifyRepresentation(Piece.createWhiteRook(), 'r');
+        verifyRepresentation(Piece.createBlackRook(), 'R');
+
+        verifyRepresentation(Piece.createWhiteBishop(), 'b');
+        verifyRepresentation(Piece.createBlackBishop(), 'B');
+
+        verifyRepresentation(Piece.createWhiteQueen(), 'q');
+        verifyRepresentation(Piece.createBlackQueen(), 'Q');
+
+        verifyRepresentation(Piece.createWhiteKing(), 'k');
+        verifyRepresentation(Piece.createBlackKing(), 'K');
+
+    }
+
+    private void verifyPiece(final Piece piece, final String color, final String name){
+        assertEquals(color, piece.getColor());
+        assertEquals(name, piece.getName());
+    }
+
+    private void verifyRepresentation(final Piece piece, final Character representation){
+        assertEquals(representation, piece.getRepresentation());
     }
 }
