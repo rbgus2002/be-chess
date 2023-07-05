@@ -24,6 +24,7 @@ public class Board {
     }
 
     public void initialize() {
+        board = new ArrayList<>();
         board.add(initFirstLineInBoard(Piece.BLACK_COLOR));
         board.add(this.blackPawnsResults);
         board.add(new ArrayList<>());

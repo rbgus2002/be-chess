@@ -8,16 +8,16 @@ public class Game {
 
     public void run() {
         Board board = new Board();
-        board.initialize();
 
         while (true){
+            board.initialize();
             Scanner in = new Scanner(System.in);
             String input = in.next();
 
             if(!verifyInput(input))
                 break;
 
-            board.showBoard();
+            System.out.println(board.showBoard());
         }
     }
 
