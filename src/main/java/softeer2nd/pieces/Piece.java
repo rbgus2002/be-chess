@@ -94,6 +94,14 @@ public class Piece {
         return ch;
     }
 
+    public boolean isWhite() {
+        return this.color.equals(WHITE_COLOR);
+    }
+
+    public boolean isBlack() {
+        return this.color.equals(BLACK_COLOR);
+    }
+
     @Override
     public String toString() {
         return getRepresentation().toString();

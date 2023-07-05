@@ -53,8 +53,18 @@ class PieceTest {
 
         verifyRepresentation(Piece.createWhiteKing(), 'k');
         verifyRepresentation(Piece.createBlackKing(), 'K');
-
     }
+
+    @Test
+    @DisplayName("Piece의 색깔을 검사한다")
+    public void verifyColor(){
+        Piece white = Piece.createWhitePawn();
+        Piece black = Piece.createBlackPawn();
+
+        assertThat(white.isWhite()).isTrue();
+        assertThat(black.isBlack()).isTrue();
+    }
+
 
     private void verifyPiece(final Piece piece, final String color, final String name){
         assertEquals(color, piece.getColor());
