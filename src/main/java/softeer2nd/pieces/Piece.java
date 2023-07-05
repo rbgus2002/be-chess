@@ -1,7 +1,7 @@
 package softeer2nd.pieces;
 
 public class Piece {
-    private String name; //  pawn, knight, rook, bishop, queen, king
+    private String name; // pawn, knight, rook, bishop, queen, king
     private String color;
 
     public final static String WHITE_COLOR = "white";
@@ -23,56 +23,44 @@ public class Piece {
         this.color = color;
     }
 
-    public static Piece init(String name, String color) {
-        return new Piece(name, color);
-    }
-
+    /**
+     * Piece 생성을 위한 팩토리 메소드
+     */
     public static Piece createWhitePawn() {
-        return init(PAWN, WHITE_COLOR);
+        return new Piece(PAWN, WHITE_COLOR);
     }
-
     public static Piece createBlackPawn() {
-        return init(PAWN, BLACK_COLOR);
+        return new Piece(PAWN, BLACK_COLOR);
     }
-
     public static Piece createWhiteKnight() {
-        return init(KNIGHT, WHITE_COLOR);
+        return new Piece(KNIGHT, WHITE_COLOR);
     }
-
     public static Piece createBlackKnight() {
-        return init(KNIGHT, BLACK_COLOR);
+        return new Piece(KNIGHT, BLACK_COLOR);
     }
-
     public static Piece createWhiteRook() {
-        return init(ROOK, WHITE_COLOR);
+        return new Piece(ROOK, WHITE_COLOR);
     }
-
     public static Piece createBlackRook() {
-        return init(ROOK, BLACK_COLOR);
+        return new Piece(ROOK, BLACK_COLOR);
     }
-
     public static Piece createWhiteBishop() {
-        return init(BISHOP, WHITE_COLOR);
+        return new Piece(BISHOP, WHITE_COLOR);
     }
-
     public static Piece createBlackBishop() {
-        return init(BISHOP, BLACK_COLOR);
+        return new Piece(BISHOP, BLACK_COLOR);
     }
-
     public static Piece createWhiteQueen() {
-        return init(QUEEN, WHITE_COLOR);
+        return new Piece(QUEEN, WHITE_COLOR);
     }
-
     public static Piece createBlackQueen() {
-        return init(QUEEN, BLACK_COLOR);
+        return new Piece(QUEEN, BLACK_COLOR);
     }
-
     public static Piece createWhiteKing() {
-        return init(KING, WHITE_COLOR);
+        return new Piece(KING, WHITE_COLOR);
     }
-
     public static Piece createBlackKing() {
-        return init(KING, BLACK_COLOR);
+        return new Piece(KING, BLACK_COLOR);
     }
 
     public String getColor() {
