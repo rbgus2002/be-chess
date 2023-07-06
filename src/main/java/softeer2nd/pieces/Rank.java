@@ -92,6 +92,15 @@ public class Rank {
         return size;
     }
 
+    public int getPiece(Type type, Color color) {
+        int size = 0;
+        for(Piece file : files){
+            if(file.isSameTypeAndColor(type, color))
+                size++;
+        }
+        return size;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

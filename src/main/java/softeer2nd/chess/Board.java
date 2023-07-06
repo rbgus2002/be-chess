@@ -2,11 +2,11 @@ package softeer2nd.chess;
 
 import softeer2nd.pieces.Piece;
 import softeer2nd.pieces.Rank;
-import softeer2nd.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static softeer2nd.pieces.Piece.*;
 import static softeer2nd.utils.StringUtils.*;
 
 public class Board {
@@ -26,18 +26,33 @@ public class Board {
 
     public String showBoard() {
         StringBuilder sb = new StringBuilder();
-        for(int row = SIZE - 1; row >= 0; row--){
+        for (int row = SIZE - 1; row >= 0; row--) {
             sb.append(appendNewLine(board.get(row).toString()));
         }
 
         return sb.toString();
     }
 
-    public int pieceCount() {
+    /**
+     * 체스판에서 전체 기물의 개수를 가져온다.
+     */
+    public int getPieceCount() {
         int size = 0;
-        for(Rank rank : board){
+        for (Rank rank : board) {
             size += rank.getPiece();
         }
         return size;
     }
+
+    /**
+     * 체스판에서 종류와 색깔이 일치하는 기물의 개수를 가져온다.
+     */
+    public int getPieceCount(Type type, Color color) {
+        int size = 0;
+        for (Rank rank : board) {
+            size += rank.getPiece(type, color);
+        }
+        return size;
+    }
+
 }
