@@ -13,37 +13,37 @@ public class Rank {
 
     private Rank(int line) {
         this.line = line;
-    }
 
-    public static Rank lineOf(final int line) {
-        Rank rank = new Rank(line);
-
+        // set files
         switch (line) {
             case 1:
-                rank.createLine1();
+                setLine1();
                 break;
             case 2:
-                rank.createLine2();
+                setLine2();
                 break;
             case 3:
             case 4:
             case 5:
             case 6:
-                rank.createBlankLine();
+                setBlankLine();
                 break;
             case 7:
-                rank.createLine7();
+                setLine7();
                 break;
             case 8:
-                rank.createLine8();
+                setLine8();
                 break;
             default:
                 throw new IllegalArgumentException("잘못된 line 입력 입니다.");
         }
-        return rank;
     }
 
-    private void createLine1() {
+    public static Rank lineOf(final int line) {
+        return new Rank(line);
+    }
+
+    private void setLine1() {
         files.add(createWhiteRook());
         files.add(createWhiteKnight());
         files.add(createWhiteBishop());
@@ -54,21 +54,19 @@ public class Rank {
         files.add(createWhiteRook());
     }
 
-    private void createLine2() {
+    private void setLine2() {
         for(int col = 1; col <= Board.SIZE; col++){
             files.add(createWhitePawn());
         }
     }
 
-    private void createLine7() {
+    private void setLine7() {
         for(int col = 1; col <= Board.SIZE; col++){
             files.add(createBlackPawn());
         }
     }
 
-    private void createLine8() {
-
-
+    private void setLine8() {
         files.add(createBlackRook());
         files.add(createBlackKnight());
         files.add(createBlackBishop());
@@ -79,14 +77,10 @@ public class Rank {
         files.add(createBlackRook());
     }
 
-    private void createBlankLine() {
+    private void setBlankLine() {
         for(int col = 1; col <= Board.SIZE; col++){
             files.add(createBlank());
         }
-    }
-
-    public List<Piece> getFiles() {
-        return files;
     }
 
     public int getPiece() {
