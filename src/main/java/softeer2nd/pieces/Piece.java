@@ -129,5 +129,3 @@ public class Piece {
         return type;
     }
 }
-
-// TODO : PR 닫힌 거 확인 후 merge, 3번 팩토리 메소드 리팩토링부터 시작 (Type을 인자로 받으라는 뜻인 듯)

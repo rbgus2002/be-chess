@@ -1,80 +1,27 @@
 package softeer2nd.chess;
 
 import softeer2nd.pieces.Piece;
+import softeer2nd.pieces.Rank;
 import softeer2nd.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static softeer2nd.pieces.Piece.*;
-import static softeer2nd.pieces.Piece.Color.BLACK;
-import static softeer2nd.pieces.Piece.Color.WHITE;
-import static softeer2nd.pieces.Piece.createWhiteKing;
+import static softeer2nd.utils.StringUtils.*;
 
 public class Board {
-    private final int SIZE = 8;
+    public final static int SIZE = 8;
 
-    List<List<Piece>> board;
+    private List<Rank> board;
 
     public Board() {
     }
 
     public void initialize() {
         board = new ArrayList<>();
-
-        board.add(initBlackFirstLine());
-        board.add(initPawnLine(BLACK));
-        board.add(initBlank());
-        board.add(initBlank());
-        board.add(initBlank());
-        board.add(initBlank());
-        board.add(initPawnLine(WHITE));
-        board.add(initWhiteFirstLine());
-    }
-
-    private List<Piece> initPawnLine(Color color){
-        List<Piece> pawnList = new ArrayList<>();
-        for(int col = 0; col < SIZE; col++){
-            pawnList.add((color == WHITE) ? createWhitePawn() : createBlackPawn());
+        for (int line = 1; line <= SIZE; line++) {
+            board.add(Rank.lineOf(line));
         }
-        return pawnList;
-    }
-
-    // TODO : stream 학습 후 적용
-    private List<Piece> initBlank(){
-        List<Piece> blankList = new ArrayList<>();
-        for(int col = 0; col < SIZE; col++){
-            blankList.add(createBlank());
-        }
-        return blankList;
-    }
-    
-    private List<Piece> initBlackFirstLine(){
-        List<Piece> blackList = new ArrayList<>();
-        blackList.add(createBlackRook());
-        blackList.add(createBlackKnight());
-        blackList.add(createBlackBishop());
-        blackList.add(createBlackQueen());
-        blackList.add(createBlackKing());
-        blackList.add(createBlackBishop());
-        blackList.add(createBlackKnight());
-        blackList.add(createBlackRook());
-
-        return blackList;
-    }
-
-    private List<Piece> initWhiteFirstLine(){
-        List<Piece> whiteList = new ArrayList<>();
-        whiteList.add(createWhiteRook());
-        whiteList.add(createWhiteKnight());
-        whiteList.add(createWhiteBishop());
-        whiteList.add(createWhiteQueen());
-        whiteList.add(createWhiteKing());
-        whiteList.add(createWhiteBishop());
-        whiteList.add(createWhiteKnight());
-        whiteList.add(createWhiteRook());
-
-        return whiteList;
     }
 
     public String showBoard() {
@@ -84,10 +31,8 @@ public class Board {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for(List<Piece> row : board){
-            for(Piece piece : row)
-                sb.append(piece);
-            sb.append(StringUtils.appendNewLine(""));
+        for(int row = SIZE - 1; row >= 0; row--){
+            sb.append(appendNewLine(board.get(row).toString()));
         }
 
         return sb.toString();
@@ -95,12 +40,9 @@ public class Board {
 
     public int pieceCount() {
         int size = 0;
-        for(List<Piece> row : board){
-            for(Piece col : row){
-                size += (col.isBlank()) ? 0 : 1;
-            }
+        for(Rank rank : board){
+            size += rank.getPiece();
         }
-
         return size;
     }
 }
