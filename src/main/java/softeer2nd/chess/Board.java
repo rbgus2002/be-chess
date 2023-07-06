@@ -25,11 +25,6 @@ public class Board {
     }
 
     public String showBoard() {
-        return this.toString();
-    }
-
-    @Override
-    public String toString() {
         StringBuilder sb = new StringBuilder();
         for(int row = SIZE - 1; row >= 0; row--){
             sb.append(appendNewLine(board.get(row).toString()));
