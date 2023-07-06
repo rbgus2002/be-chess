@@ -4,6 +4,8 @@ import softeer2nd.pieces.Piece;
 import softeer2nd.pieces.Rank;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static softeer2nd.pieces.Piece.*;
@@ -108,7 +110,20 @@ public class Board {
             if(rank.getPiece(file).isSameTypeAndColor(PAWN, color))
                 return true;
         }
-
         return false;
+    }
+
+    public List<Piece> getPieceListOrderByScoreDesc(Color color) {
+        List<Piece> pieceList = new ArrayList<>();
+        for(Rank rank : board){
+            rank.addPieceOfSameColor(pieceList, color);
+        }
+        Collections.sort(pieceList, new Comparator<Piece>() {
+            @Override
+            public int compare(Piece o1, Piece o2) {
+                return Double.compare(o2.getType().getScore(), o1.getType().getScore());
+            }
+        });
+        return pieceList;
     }
 }

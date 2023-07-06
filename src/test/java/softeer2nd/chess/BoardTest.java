@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import softeer2nd.pieces.Piece;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static softeer2nd.pieces.Piece.Color.*;
 import static softeer2nd.pieces.Piece.Type.*;
@@ -134,7 +137,7 @@ class BoardTest {
 
     @Test
     @DisplayName("빈 체스판에 기물을 추가한다")
-    void moveInEmptyBoard(){
+    void moveInEmptyBoard() {
         // given
         board.initializeEmpty();
 
@@ -148,10 +151,10 @@ class BoardTest {
     }
 
     @Nested
-    class CalculateScore{
+    class CalculateScore {
         @Test
         @DisplayName("색깔별로 체스판의 점수를 계산한다")
-        void calculateScore(){
+        void calculateScore() {
             // given
             board.initializeEmpty();
 
@@ -169,14 +172,12 @@ class BoardTest {
             // then
             assertEquals(15.0, board.calculateScore(Piece.Color.BLACK), 0.01);
             assertEquals(7.0, board.calculateScore(Piece.Color.WHITE), 0.01);
-
             System.out.println(board.showBoard());
         }
 
-        // FIXME
         @Test
         @DisplayName("같은 파일에 같은색 Pawn이 있는 경우 0.5점을 뺀다")
-        void calculatePawnScore(){
+        void calculatePawnScore() {
             // given
             board.initializeEmpty();
 
@@ -187,8 +188,26 @@ class BoardTest {
 
             // then
             assertEquals(1.5, board.calculateScore(Piece.Color.BLACK), 0.01);
-
             System.out.println(board.showBoard());
         }
+    }
+    
+    @Test
+    @DisplayName("현재 체스판에서 특정 색깔의 기물의 점수를 오름차순으로 정렬한다")
+    void getPieceListOrderByScoreDesc(){
+        // given
+        board.initializeEmpty();
+
+        board.board(Position.of("b1"), Piece.createWhitePawn());
+        board.board(Position.of("c1"), Piece.createWhiteRook());
+        board.board(Position.of("d1"), Piece.createWhiteKing());
+
+        // when
+        List<Piece> pieceList = board.getPieceListOrderByScoreDesc(WHITE);
+
+        // then
+        assertEquals(3, pieceList.size());
+        assertThat(pieceList.get(0).getType().getScore()).isGreaterThan(pieceList.get(1).getType().getScore());
+        System.out.println(pieceList);
     }
 }

@@ -35,8 +35,9 @@ public class Game {
         if(input.equals("start"))
             return true;
         else{
-            if(!input.equals("end"))
+            if(!input.equals("end")){
                 System.out.println("Input Error!"); // TODO : Exception 생성 (Business Exception => InvalidInputException이 적당할듯)
+            }
             return false;
         }
     }
