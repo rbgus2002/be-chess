@@ -8,7 +8,7 @@ import java.util.List;
 import static softeer2nd.pieces.Piece.*;
 
 public class Rank {
-    private List<Piece> files = new ArrayList<>();
+    private List<Piece> pieces = new ArrayList<>();
     private int line;
 
     private Rank(int line) {
@@ -44,67 +44,75 @@ public class Rank {
     }
 
     private void setLine1() {
-        files.add(createWhiteRook());
-        files.add(createWhiteKnight());
-        files.add(createWhiteBishop());
-        files.add(createWhiteQueen());
-        files.add(createWhiteKing());
-        files.add(createWhiteBishop());
-        files.add(createWhiteKnight());
-        files.add(createWhiteRook());
+        pieces.add(createWhiteRook());
+        pieces.add(createWhiteKnight());
+        pieces.add(createWhiteBishop());
+        pieces.add(createWhiteQueen());
+        pieces.add(createWhiteKing());
+        pieces.add(createWhiteBishop());
+        pieces.add(createWhiteKnight());
+        pieces.add(createWhiteRook());
     }
 
     private void setLine2() {
         for(int col = 1; col <= Board.SIZE; col++){
-            files.add(createWhitePawn());
+            pieces.add(createWhitePawn());
         }
     }
 
     private void setLine7() {
         for(int col = 1; col <= Board.SIZE; col++){
-            files.add(createBlackPawn());
+            pieces.add(createBlackPawn());
         }
     }
 
     private void setLine8() {
-        files.add(createBlackRook());
-        files.add(createBlackKnight());
-        files.add(createBlackBishop());
-        files.add(createBlackQueen());
-        files.add(createBlackKing());
-        files.add(createBlackBishop());
-        files.add(createBlackKnight());
-        files.add(createBlackRook());
+        pieces.add(createBlackRook());
+        pieces.add(createBlackKnight());
+        pieces.add(createBlackBishop());
+        pieces.add(createBlackQueen());
+        pieces.add(createBlackKing());
+        pieces.add(createBlackBishop());
+        pieces.add(createBlackKnight());
+        pieces.add(createBlackRook());
     }
 
     private void setBlankLine() {
         for(int col = 1; col <= Board.SIZE; col++){
-            files.add(createBlank());
+            pieces.add(createBlank());
         }
     }
 
-    public int getPiece() {
+    public int getPieceCount() {
         int size = 0;
-        for(Piece file : files){
+        for(Piece file : pieces){
             if(!file.isBlank())
                 size++;
         }
         return size;
     }
 
-    public int getPiece(Type type, Color color) {
+    public int getPieceCount(Type type, Color color) {
         int size = 0;
-        for(Piece file : files){
+        for(Piece file : pieces){
             if(file.isSameTypeAndColor(type, color))
                 size++;
         }
         return size;
     }
 
+    public Piece getPiece(char file){
+        return pieces.get(convertFileToIdx(file));
+    }
+
+    private int convertFileToIdx(char file){
+        return file - 'a';
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for(Piece file : files){
+        for(Piece file : pieces){
             sb.append(file);
         }
         return sb.toString();

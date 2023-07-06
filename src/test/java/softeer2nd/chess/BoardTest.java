@@ -3,6 +3,7 @@ package softeer2nd.chess;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import softeer2nd.pieces.Piece;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static softeer2nd.pieces.Piece.Color.*;
@@ -78,5 +79,21 @@ class BoardTest {
                     () -> assertEquals(KING_COUNT, board.getPieceCount(KING, BLACK))
             );
         }
+    }
+
+    @Test
+    @DisplayName("기물의 위치를 조회해서 가져온다")
+    void findPiece() {
+        // given
+        Board board = new Board();
+
+        // when
+        board.initialize();
+
+        // then
+        assertAll(
+                () -> assertTrue(board.findPiece("a8").isSameTypeAndColor(ROOK, BLACK)),
+                () -> assertTrue(board.findPiece("e1").isSameTypeAndColor(KING, WHITE))
+        );
     }
 }

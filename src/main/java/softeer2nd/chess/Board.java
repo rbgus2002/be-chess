@@ -39,7 +39,7 @@ public class Board {
     public int getPieceCount() {
         int size = 0;
         for (Rank rank : board) {
-            size += rank.getPiece();
+            size += rank.getPieceCount();
         }
         return size;
     }
@@ -50,9 +50,18 @@ public class Board {
     public int getPieceCount(Type type, Color color) {
         int size = 0;
         for (Rank rank : board) {
-            size += rank.getPiece(type, color);
+            size += rank.getPieceCount(type, color);
         }
         return size;
     }
 
+    // TODO : Point로 refactoring 할지 생각해보기
+    public Piece findPiece(String point){
+        // TODO : validate 검사하기
+
+        char file = point.charAt(0);
+        int rank = point.charAt(1) - '0';
+
+        return board.get(rank-1).getPiece(file);
+    }
 }
