@@ -55,13 +55,7 @@ public class Board {
         return size;
     }
 
-    // TODO : Point로 refactoring 할지 생각해보기
-    public Piece findPiece(String point){
-        // TODO : validate 검사하기
-
-        char file = point.charAt(0);
-        int rank = point.charAt(1) - '0';
-
-        return board.get(rank-1).getPiece(file);
+    public Piece findPieceByPoint(Point point){
+        return board.get(point.getRank()).getPiece(point.getFileToInt());
     }
 }

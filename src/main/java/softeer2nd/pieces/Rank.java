@@ -101,12 +101,8 @@ public class Rank {
         return size;
     }
 
-    public Piece getPiece(char file){
-        return pieces.get(convertFileToIdx(file));
-    }
-
-    private int convertFileToIdx(char file){
-        return file - 'a';
+    public Piece getPiece(int file){
+        return pieces.get(file);
     }
 
     @Override
