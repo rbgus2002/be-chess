@@ -3,75 +3,70 @@ package softeer2nd.pieces;
 import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static softeer2nd.pieces.Piece.*;
 
 
 class PieceTest {
-    @Nested
-    class create{
-        @Test
-        @DisplayName("Piece를 생성한다")
-        public void createPawn(){
-            verifyPiece(Piece.createWhitePawn(), Piece.WHITE_COLOR, Piece.PAWN);
-            verifyPiece(Piece.createBlackPawn(), Piece.BLACK_COLOR, Piece.PAWN);
+    @Test
+    @DisplayName("Piece를 생성한다")
+    public void createPawn() {
+        verifyPiece(createWhitePawn(), createBlackPawn(), Type.PAWN);
+        verifyPiece(createWhiteKnight(), createBlackKnight(), Type.KNIGHT);
+        verifyPiece(createWhiteRook(), createBlackRook(), Type.ROOK);
+        verifyPiece(createWhiteBishop(), createBlackBishop(), Type.BISHOP);
+        verifyPiece(createWhiteQueen(), createBlackQueen(), Type.QUEEN);
+        verifyPiece(createWhiteKing(), createBlackKing(), Type.KING);
 
-            verifyPiece(Piece.createWhiteKnight(), Piece.WHITE_COLOR, Piece.KNIGHT);
-            verifyPiece(Piece.createBlackKnight(), Piece.BLACK_COLOR, Piece.KNIGHT);
-
-            verifyPiece(Piece.createWhiteRook(), Piece.WHITE_COLOR, Piece.ROOK);
-            verifyPiece(Piece.createBlackRook(), Piece.BLACK_COLOR, Piece.ROOK);
-
-            verifyPiece(Piece.createWhiteBishop(), Piece.WHITE_COLOR, Piece.BISHOP);
-            verifyPiece(Piece.createBlackBishop(), Piece.BLACK_COLOR, Piece.BISHOP);
-
-            verifyPiece(Piece.createWhiteQueen(), Piece.WHITE_COLOR, Piece.QUEEN);
-            verifyPiece(Piece.createBlackQueen(), Piece.BLACK_COLOR, Piece.QUEEN);
-
-            verifyPiece(Piece.createWhiteKing(), Piece.WHITE_COLOR, Piece.KING);
-            verifyPiece(Piece.createBlackKing(), Piece.BLACK_COLOR, Piece.KING);
-        }
+        // check blank
+        Piece blank = Piece.createBlank();
+        assertFalse(blank.isBlack());
+        assertFalse(blank.isWhite());
+        assertEquals(Type.NO_PIECE, blank.getType());
     }
 
     @Test
     @DisplayName("Piece가 가지는 말의 representation을 출력한다")
-    public void getRepresentation(){
-        verifyRepresentation(Piece.createWhitePawn(), 'p');
-        verifyRepresentation(Piece.createBlackPawn(), 'P');
+    public void getRepresentation() {
+        verifyRepresentation(createWhitePawn(), 'p');
+        verifyRepresentation(createBlackPawn(), 'P');
 
-        verifyRepresentation(Piece.createWhiteKnight(), 'n');
-        verifyRepresentation(Piece.createBlackKnight(), 'N');
+        verifyRepresentation(createWhiteKnight(), 'n');
+        verifyRepresentation(createBlackKnight(), 'N');
 
-        verifyRepresentation(Piece.createWhiteRook(), 'r');
-        verifyRepresentation(Piece.createBlackRook(), 'R');
+        verifyRepresentation(createWhiteRook(), 'r');
+        verifyRepresentation(createBlackRook(), 'R');
 
-        verifyRepresentation(Piece.createWhiteBishop(), 'b');
-        verifyRepresentation(Piece.createBlackBishop(), 'B');
+        verifyRepresentation(createWhiteBishop(), 'b');
+        verifyRepresentation(createBlackBishop(), 'B');
 
-        verifyRepresentation(Piece.createWhiteQueen(), 'q');
-        verifyRepresentation(Piece.createBlackQueen(), 'Q');
+        verifyRepresentation(createWhiteQueen(), 'q');
+        verifyRepresentation(createBlackQueen(), 'Q');
 
-        verifyRepresentation(Piece.createWhiteKing(), 'k');
-        verifyRepresentation(Piece.createBlackKing(), 'K');
+        verifyRepresentation(createWhiteKing(), 'k');
+        verifyRepresentation(createBlackKing(), 'K');
     }
 
     @Test
     @DisplayName("Piece의 색깔을 검사한다")
-    public void verifyColor(){
-        Piece white = Piece.createWhitePawn();
-        Piece black = Piece.createBlackPawn();
+    public void verifyColor() {
+        Piece white = createWhitePawn();
+        Piece black = createBlackPawn();
 
         assertThat(white.isWhite()).isTrue();
         assertThat(black.isBlack()).isTrue();
     }
 
 
-    private void verifyPiece(final Piece piece, final String color, final String name){
-        assertEquals(color, piece.getColor());
-        assertEquals(name, piece.getName());
+    private void verifyPiece(final Piece white, final Piece black, Type type) {
+        assertTrue(white.isWhite());
+        assertEquals(type, white.getType());
+
+        assertTrue(black.isBlack());
+        assertEquals(type, black.getType());
     }
 
-    private void verifyRepresentation(final Piece piece, final Character representation){
+    private void verifyRepresentation(final Piece piece, final Character representation) {
         assertEquals(representation, piece.getRepresentation());
     }
 }

@@ -5,7 +5,6 @@ import softeer2nd.chess.Board;
 import java.util.Scanner;
 
 public class Game {
-
     public void run() {
         Board board = new Board();
 
