@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static softeer2nd.pieces.Piece.*;
+import static softeer2nd.pieces.Piece.Type.*;
 import static softeer2nd.utils.StringUtils.*;
 
 public class Board {
@@ -24,7 +25,7 @@ public class Board {
         }
     }
 
-    public void initializeEmpty(){
+    public void initializeEmpty() {
         board = new ArrayList<>();
         for (int line = 1; line <= SIZE; line++) {
             board.add(Rank.lineOf(4));
@@ -62,12 +63,52 @@ public class Board {
         return size;
     }
 
-    public Piece findPieceByPoint(Point point){
-        return board.get(point.getRank()).getPiece(point.getFileToInt());
+    public Piece findPieceByPosition(Position position) {
+        return board.get(position.getRank()).getPiece(position.getFileToInt());
     }
 
     // TODO : 추후 미션6에서 Move class로 분리 필수
-    public void move(Piece blackPawn, Point point){
-        board.get(point.getRank()).insertPiece(blackPawn, point.getFileToInt());
+    public void board(Position position, Piece blackPawn) {
+        board.get(position.getRank()).insertPiece(blackPawn, position.getFileToInt());
+    }
+
+    public double calculateScore(Color color) {
+        double score = 0;
+        for (int line = 0; line < SIZE; line++) {
+            Rank rank = board.get(line);
+            score += calculateScoreInRank(rank, color, line);
+        }
+        return score;
+    }
+
+    private double calculateScoreInRank(Rank rank, Color color, int line) {
+        double score = 0;
+        for (int file = 0; file < SIZE; file++) {
+            Piece piece = rank.getPiece(file);
+
+            if (piece.isSameColor(color)) {
+                score += piece.getType().getScore();
+                if (piece.isPawn() && existPawnInSameFile(file, line, piece.getColor())) {
+                    score -= 0.5;
+                }
+            }
+        }
+        return score;
+    }
+
+    /**
+     * 같은 파일에 같은 색 Pawn이 있는가?
+     */
+    private boolean existPawnInSameFile(int file, int exceptLine, Color color) {
+        for(int line = 0; line < SIZE; line++){
+            if(line == exceptLine)
+                continue;
+
+            Rank rank = board.get(line);
+            if(rank.getPiece(file).isSameTypeAndColor(PAWN, color))
+                return true;
+        }
+
+        return false;
     }
 }

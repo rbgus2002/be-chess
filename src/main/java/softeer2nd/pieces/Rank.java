@@ -9,12 +9,8 @@ import static softeer2nd.pieces.Piece.*;
 
 public class Rank {
     private List<Piece> pieces = new ArrayList<>();
-    private int line;
 
     private Rank(int line) {
-        this.line = line;
-
-        // set files
         switch (line) {
             case 1:
                 setLine1();
@@ -37,6 +33,10 @@ public class Rank {
             default:
                 throw new IllegalArgumentException("잘못된 line 입력 입니다.");
         }
+    }
+
+    public List<Piece> getPieces() {
+        return pieces;
     }
 
     public static Rank lineOf(final int line) {
@@ -105,7 +105,7 @@ public class Rank {
         return pieces.get(file);
     }
 
-    // FIXME
+    // TODO : Move class 분리하면서 refactoring
     public void insertPiece(Piece newPiece, int file){
         pieces.set(file, newPiece);
     }

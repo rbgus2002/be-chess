@@ -1,17 +1,17 @@
 package softeer2nd.chess;
 
-public class Point {
+public class Position {
     private char file;
     private int rank;
 
-    private Point(String point) {
-        validate(point);
-        this.file = point.charAt(0);
-        this.rank = (point.charAt(1) - '0') - 1; // idx 0부터 시작하기 때문에 -1
+    private Position(String position) {
+        validate(position);
+        this.file = position.charAt(0);
+        this.rank = (position.charAt(1) - '0') - 1; // idx 0부터 시작하기 때문에 -1
     }
 
-    public static Point of(String point){
-        return new Point(point);
+    public static Position of(String position){
+        return new Position(position);
     }
 
     /**
@@ -20,13 +20,13 @@ public class Point {
      * 2. 첫 글자가 'a' ~ 'h'가 아닌 경우
      * 3. 마지막 글자가 '1' ~ '8'가 아닌 경우
      */
-    private void validate(String point){
-        if(point.length() != 2)
+    private void validate(String position){
+        if(position.length() != 2)
             throw new IllegalArgumentException("잘못된 좌표입니다.");
-        if(!isValidFile(point.charAt(0))){
+        if(!isValidFile(position.charAt(0))){
             throw new IllegalArgumentException("잘못된 좌표입니다.");
         }
-        if(!isValidRank(point.charAt(1))){
+        if(!isValidRank(position.charAt(1))){
             throw new IllegalArgumentException("잘못된 좌표입니다.");
         }
     }

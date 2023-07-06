@@ -12,18 +12,23 @@ public class Piece {
     }
 
     public enum Type {
-        PAWN('p'), KNIGHT('n'), ROOK('r'), BISHOP('b'), QUEEN('q'), KING('k'), NO_PIECE('.');
+        PAWN('p', 1.0), KNIGHT('n', 2.5), ROOK('r', 5.0), BISHOP('b', 3), QUEEN('q', 9), KING('k', 0), NO_PIECE('.', 0);
 
         private char representation;
+        private double score;
 
-        private Type(char representation) {
+        Type(char representation, double score) {
             this.representation = representation;
+            this.score = score;
         }
 
         public char getRepresentation() {
             return representation;
         }
 
+        public double getScore() {
+            return score;
+        }
     }
 
     private Piece() {
@@ -35,7 +40,7 @@ public class Piece {
     }
 
     /**
-     * Piece 생성을 위한 팩토리 메소드
+     * 정적 팩토리 메소드
      */
     public static Piece createWhitePawn() {
         return createWhite(PAWN);
@@ -98,7 +103,7 @@ public class Piece {
     }
 
     public Character getRepresentation() {
-        if(color == BLACK){
+        if (color == BLACK) {
             return Character.toUpperCase(type.getRepresentation());
         }
         return type.getRepresentation();
@@ -112,11 +117,19 @@ public class Piece {
         return color == BLACK;
     }
 
-    public boolean isBlank(){
+    public boolean isBlank() {
         return type == NO_PIECE;
     }
 
-    public boolean isSameTypeAndColor(Type type, Color color){
+    public boolean isPawn() {
+        return this.type == PAWN;
+    }
+
+    public boolean isSameColor(Color color) {
+        return this.color == color;
+    }
+
+    public boolean isSameTypeAndColor(Type type, Color color) {
         return this.type == type && this.color == color;
     }
 
@@ -125,11 +138,11 @@ public class Piece {
         return getRepresentation().toString();
     }
 
-    public Color getColor() {
-        return color;
-    }
-
     public Type getType() {
         return type;
+    }
+
+    public Color getColor() {
+        return color;
     }
 }

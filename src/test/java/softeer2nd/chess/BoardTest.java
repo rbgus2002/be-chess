@@ -82,7 +82,7 @@ class BoardTest {
     }
 
     @Nested
-    class FindPieceByPoint {
+    class FindPieceByPosition {
         @Test
         @DisplayName("유효하지 않은 좌표의 경우 예외를 던진다")
         void findPieceByInvalidPoint() {
@@ -97,11 +97,11 @@ class BoardTest {
             board.initialize();
 
             // then
-            assertThrows(IllegalArgumentException.class, () -> board.findPieceByPoint(Point.of(invalidPoint1)));
-            assertThrows(IllegalArgumentException.class, () -> board.findPieceByPoint(Point.of(invalidPoint2)));
-            assertThrows(IllegalArgumentException.class, () -> board.findPieceByPoint(Point.of(invalidPoint3)));
-            assertThrows(IllegalArgumentException.class, () -> board.findPieceByPoint(Point.of(invalidPoint4)));
-            assertThrows(IllegalArgumentException.class, () -> board.findPieceByPoint(Point.of(invalidPoint5)));
+            assertThrows(IllegalArgumentException.class, () -> board.findPieceByPosition(Position.of(invalidPoint1)));
+            assertThrows(IllegalArgumentException.class, () -> board.findPieceByPosition(Position.of(invalidPoint2)));
+            assertThrows(IllegalArgumentException.class, () -> board.findPieceByPosition(Position.of(invalidPoint3)));
+            assertThrows(IllegalArgumentException.class, () -> board.findPieceByPosition(Position.of(invalidPoint4)));
+            assertThrows(IllegalArgumentException.class, () -> board.findPieceByPosition(Position.of(invalidPoint5)));
         }
 
         @Test
@@ -112,8 +112,8 @@ class BoardTest {
 
             // then
             assertAll(
-                    () -> assertTrue(board.findPieceByPoint(Point.of("a8")).isSameTypeAndColor(ROOK, BLACK)),
-                    () -> assertTrue(board.findPieceByPoint(Point.of("e1")).isSameTypeAndColor(KING, WHITE))
+                    () -> assertTrue(board.findPieceByPosition(Position.of("a8")).isSameTypeAndColor(ROOK, BLACK)),
+                    () -> assertTrue(board.findPieceByPosition(Position.of("e1")).isSameTypeAndColor(KING, WHITE))
             );
         }
     }
@@ -140,10 +140,55 @@ class BoardTest {
 
         // when
         Piece blackPawn = Piece.createBlackPawn();
-        Point point = Point.of("c5");
-        board.move(blackPawn, point);
+        Position position = Position.of("c5");
+        board.board(position, blackPawn);
 
         // then
-        assertEquals(blackPawn, board.findPieceByPoint(point));
+        assertEquals(blackPawn, board.findPieceByPosition(position));
+    }
+
+    @Nested
+    class CalculateScore{
+        @Test
+        @DisplayName("색깔별로 체스판의 점수를 계산한다")
+        void calculateScore(){
+            // given
+            board.initializeEmpty();
+
+            // when
+            board.board(Position.of("b6"), Piece.createBlackPawn());
+            board.board(Position.of("e6"), Piece.createBlackQueen());
+            board.board(Position.of("b8"), Piece.createBlackKing());
+            board.board(Position.of("c8"), Piece.createBlackRook());
+
+            board.board(Position.of("f2"), Piece.createWhitePawn());
+            board.board(Position.of("g2"), Piece.createWhitePawn());
+            board.board(Position.of("e1"), Piece.createWhiteRook());
+            board.board(Position.of("f1"), Piece.createWhiteKing());
+
+            // then
+            assertEquals(15.0, board.calculateScore(Piece.Color.BLACK), 0.01);
+            assertEquals(7.0, board.calculateScore(Piece.Color.WHITE), 0.01);
+
+            System.out.println(board.showBoard());
+        }
+
+        // FIXME
+        @Test
+        @DisplayName("같은 파일에 같은색 Pawn이 있는 경우 0.5점을 뺀다")
+        void calculatePawnScore(){
+            // given
+            board.initializeEmpty();
+
+            // when
+            board.board(Position.of("f2"), Piece.createBlackPawn());
+            board.board(Position.of("f3"), Piece.createBlackPawn());
+            board.board(Position.of("f4"), Piece.createBlackPawn());
+
+            // then
+            assertEquals(1.5, board.calculateScore(Piece.Color.BLACK), 0.01);
+
+            System.out.println(board.showBoard());
+        }
     }
 }
