@@ -24,6 +24,13 @@ public class Board {
         }
     }
 
+    public void initializeEmpty(){
+        board = new ArrayList<>();
+        for (int line = 1; line <= SIZE; line++) {
+            board.add(Rank.lineOf(4));
+        }
+    }
+
     public String showBoard() {
         StringBuilder sb = new StringBuilder();
         for (int row = SIZE - 1; row >= 0; row--) {
@@ -57,5 +64,10 @@ public class Board {
 
     public Piece findPieceByPoint(Point point){
         return board.get(point.getRank()).getPiece(point.getFileToInt());
+    }
+
+    // TODO : 추후 미션6에서 Move class로 분리 필수
+    public void move(Piece blackPawn, Point point){
+        board.get(point.getRank()).insertPiece(blackPawn, point.getFileToInt());
     }
 }

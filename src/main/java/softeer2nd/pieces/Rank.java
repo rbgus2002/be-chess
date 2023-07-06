@@ -105,6 +105,11 @@ public class Rank {
         return pieces.get(file);
     }
 
+    // FIXME
+    public void insertPiece(Piece newPiece, int file){
+        pieces.set(file, newPiece);
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

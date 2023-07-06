@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import softeer2nd.pieces.Piece;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static softeer2nd.pieces.Piece.Color.*;
@@ -15,7 +16,7 @@ class BoardTest {
     private Board board;
 
     @BeforeEach
-    void initBoard(){
+    void initBoard() {
         board = new Board();
     }
 
@@ -81,10 +82,10 @@ class BoardTest {
     }
 
     @Nested
-    class FindPieceByPoint{
+    class FindPieceByPoint {
         @Test
         @DisplayName("유효하지 않은 좌표의 경우 예외를 던진다")
-        void findPieceByInvalidPoint(){
+        void findPieceByInvalidPoint() {
             // given
             String invalidPoint1 = "a88";
             String invalidPoint2 = "88";
@@ -94,7 +95,7 @@ class BoardTest {
 
             // when
             board.initialize();
-            
+
             // then
             assertThrows(IllegalArgumentException.class, () -> board.findPieceByPoint(Point.of(invalidPoint1)));
             assertThrows(IllegalArgumentException.class, () -> board.findPieceByPoint(Point.of(invalidPoint2)));
@@ -102,7 +103,7 @@ class BoardTest {
             assertThrows(IllegalArgumentException.class, () -> board.findPieceByPoint(Point.of(invalidPoint4)));
             assertThrows(IllegalArgumentException.class, () -> board.findPieceByPoint(Point.of(invalidPoint5)));
         }
-        
+
         @Test
         @DisplayName("기물의 위치를 조회해서 가져온다")
         void findPieceByPoint() {
@@ -115,5 +116,34 @@ class BoardTest {
                     () -> assertTrue(board.findPieceByPoint(Point.of("e1")).isSameTypeAndColor(KING, WHITE))
             );
         }
+    }
+
+    @Test
+    @DisplayName("빈 체스판을 초기화 한다")
+    void initializeEmpty() {
+        // given, when
+        board.initializeEmpty();
+
+        // then
+        String blankRank = appendNewLine("........");
+        assertEquals(
+                blankRank + blankRank + blankRank + blankRank +
+                        blankRank + blankRank + blankRank + blankRank,
+                board.showBoard());
+    }
+
+    @Test
+    @DisplayName("빈 체스판에 기물을 추가한다")
+    void moveInEmptyBoard(){
+        // given
+        board.initializeEmpty();
+
+        // when
+        Piece blackPawn = Piece.createBlackPawn();
+        Point point = Point.of("c5");
+        board.move(blackPawn, point);
+
+        // then
+        assertEquals(blackPawn, board.findPieceByPoint(point));
     }
 }
