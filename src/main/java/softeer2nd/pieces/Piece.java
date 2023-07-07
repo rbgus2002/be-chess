@@ -34,7 +34,7 @@ public class Piece {
     private Piece() {
     }
 
-    public Piece(Type typeEnum, Color colorEnum) {
+    private Piece(Type typeEnum, Color colorEnum) {
         this.type = typeEnum;
         this.color = colorEnum;
     }
