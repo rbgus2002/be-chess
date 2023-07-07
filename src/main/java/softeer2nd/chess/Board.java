@@ -15,13 +15,13 @@ import static softeer2nd.utils.StringUtils.*;
 public class Board {
     public final static int SIZE = 8;
 
-    private List<Rank> board;
+    private List<Rank> board = new ArrayList<>();
 
     public Board() {
     }
 
     public void initialize() {
-        board = new ArrayList<>();
+        board.clear();
         for (int line = 1; line <= SIZE; line++) {
             board.add(Rank.lineOf(line));
         }
