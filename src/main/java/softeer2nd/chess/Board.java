@@ -28,7 +28,7 @@ public class Board {
     }
 
     public void initializeEmpty() {
-        board = new ArrayList<>();
+        board.clear();
         for (int line = 1; line <= SIZE; line++) {
             board.add(Rank.lineOf(4));
         }
