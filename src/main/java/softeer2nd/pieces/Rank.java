@@ -101,7 +101,7 @@ public class Rank {
         return size;
     }
 
-    public Piece getPiece(int file){
+    public Piece getPieceAt(int file){
         return pieces.get(file);
     }
 

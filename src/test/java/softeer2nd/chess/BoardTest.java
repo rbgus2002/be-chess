@@ -170,8 +170,8 @@ class BoardTest {
             board.board(Position.of("f1"), Piece.createWhiteKing());
 
             // then
-            assertEquals(15.0, board.calculateScore(Piece.Color.BLACK), 0.01);
-            assertEquals(7.0, board.calculateScore(Piece.Color.WHITE), 0.01);
+            assertEquals(15.0, board.getScoreOfColor(Piece.Color.BLACK), 0.01);
+            assertEquals(7.0, board.getScoreOfColor(Piece.Color.WHITE), 0.01);
             System.out.println(board.showBoard());
         }
 
@@ -187,7 +187,7 @@ class BoardTest {
             board.board(Position.of("f4"), Piece.createBlackPawn());
 
             // then
-            assertEquals(1.5, board.calculateScore(Piece.Color.BLACK), 0.01);
+            assertEquals(1.5, board.getScoreOfColor(Piece.Color.BLACK), 0.01);
             System.out.println(board.showBoard());
         }
     }

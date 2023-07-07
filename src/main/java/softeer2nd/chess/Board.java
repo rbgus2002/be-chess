@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import static softeer2nd.pieces.Piece.*;
-import static softeer2nd.pieces.Piece.Type.*;
+import static softeer2nd.pieces.Piece.Type.PAWN;
 import static softeer2nd.utils.StringUtils.*;
 
 public class Board {
@@ -66,7 +66,7 @@ public class Board {
     }
 
     public Piece findPieceByPosition(Position position) {
-        return board.get(position.getRank()).getPiece(position.getFileToInt());
+        return board.get(position.getRank()).getPieceAt(position.getFileToInt());
     }
 
     // TODO : 추후 미션6에서 Move class로 분리 필수
@@ -74,43 +74,37 @@ public class Board {
         board.get(position.getRank()).insertPiece(blackPawn, position.getFileToInt());
     }
 
-    public double calculateScore(Color color) {
+    public double getScoreOfColor(Color color) {
         double score = 0;
-        for (int line = 0; line < SIZE; line++) {
-            Rank rank = board.get(line);
-            score += calculateScoreInRank(rank, color, line);
+        for(int fileIdx = 0; fileIdx < SIZE; fileIdx++){
+            score += calculateScoreInFile(fileIdx, color);
         }
         return score;
     }
 
-    private double calculateScoreInRank(Rank rank, Color color, int line) {
+    private double calculateScoreInFile(int fileIdx, Color color){
+        double pawnScore = 0;
         double score = 0;
-        for (int file = 0; file < SIZE; file++) {
-            Piece piece = rank.getPiece(file);
+        for(int rankIdx = 0 ; rankIdx < SIZE; rankIdx++){
+            Piece piece = board.get(rankIdx).getPieceAt(fileIdx);
 
-            if (piece.isSameColor(color)) {
+            if(!piece.isSameColor(color)){
+                continue;
+            }
+
+            if(piece.isPawn()){
+                pawnScore += piece.getType().getScore();
+            }else{
                 score += piece.getType().getScore();
-                if (piece.isPawn() && existPawnInSameFile(file, line, piece.getColor())) {
-                    score -= 0.5;
-                }
             }
         }
-        return score;
-    }
 
-    /**
-     * 같은 파일에 같은 색 Pawn이 있는가?
-     */
-    private boolean existPawnInSameFile(int file, int exceptLine, Color color) {
-        for(int line = 0; line < SIZE; line++){
-            if(line == exceptLine)
-                continue;
-
-            Rank rank = board.get(line);
-            if(rank.getPiece(file).isSameTypeAndColor(PAWN, color))
-                return true;
+        if(pawnScore > PAWN.getScore()){
+            pawnScore /= 2;
         }
-        return false;
+        score += pawnScore;
+
+        return score;
     }
 
     public List<Piece> getPieceListOrderByScoreDesc(Color color) {
