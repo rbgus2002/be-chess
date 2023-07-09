@@ -14,8 +14,8 @@ public class Piece {
     public enum Type {
         PAWN('p', 1.0), KNIGHT('n', 2.5), ROOK('r', 5.0), BISHOP('b', 3), QUEEN('q', 9), KING('k', 0), NO_PIECE('.', 0);
 
-        private char representation;
-        private double score;
+        private final char representation;
+        private final double score;
 
         Type(char representation, double score) {
             this.representation = representation;
