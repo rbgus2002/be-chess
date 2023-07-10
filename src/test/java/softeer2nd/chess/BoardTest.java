@@ -108,45 +108,4 @@ class BoardTest {
         // then
         assertEquals(blackPawn, board.findPieceByPosition(position));
     }
-
-    @Nested
-    class CalculateScore {
-        @Test
-        @DisplayName("색깔별로 체스판의 점수를 계산한다")
-        void calculateScore() {
-            // given
-            board.initializeEmpty();
-
-            // when
-            board.insertPiece(B6, Pawn.from(BLACK));
-            board.insertPiece(E6, Queen.from(BLACK));
-            board.insertPiece(B8, King.from(BLACK));
-            board.insertPiece(C8, Rook.from(BLACK));
-            board.insertPiece(F2, Pawn.from(WHITE));
-            board.insertPiece(G2, Pawn.from(WHITE));
-            board.insertPiece(E1, Rook.from(WHITE));
-            board.insertPiece(F1, King.from(WHITE));
-
-            // then
-            assertEquals(15.0, board.getScoreOfColor(BLACK), 0.01);
-            assertEquals(7.0, board.getScoreOfColor(WHITE), 0.01);
-            System.out.println(board.showBoard());
-        }
-
-        @Test
-        @DisplayName("같은 파일에 같은색 Pawn이 있는 경우 0.5점을 뺀다")
-        void calculatePawnScore() {
-            // given
-            board.initializeEmpty();
-
-            // when
-            board.insertPiece(F2, Pawn.from(BLACK));
-            board.insertPiece(F3, Pawn.from(BLACK));
-            board.insertPiece(F4, Pawn.from(BLACK));
-
-            // then
-            assertEquals(1.5, board.getScoreOfColor(BLACK), 0.01);
-            System.out.println(board.showBoard());
-        }
-    }
 }

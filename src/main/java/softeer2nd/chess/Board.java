@@ -51,43 +51,6 @@ public class Board {
         board.get(position.getRank()).insertPiece(piece, position.getFile());
     }
 
-    public double getScoreOfColor(Color color) {
-        double score = 0;
-        for(int fileIdx = 0; fileIdx < SIZE; fileIdx++){
-            score += calculateScoreInFile(fileIdx, color);
-        }
-        return score;
-    }
-
-    private double calculateScoreInFile(int fileIdx, Color color){
-        double pawnScore = 0;
-        double score = 0;
-        for(int rankIdx = 0 ; rankIdx < SIZE; rankIdx++){
-            Piece piece = board.get(rankIdx).getPieceAt(fileIdx);
-
-            if(!piece.isSameColor(color)){
-                continue;
-            }
-
-            if(piece.isTypeOf(Pawn.class)){
-                pawnScore += piece.getScore();
-            }else{
-                score += piece.getScore();
-            }
-        }
-
-        if(pawnScore > Pawn.SCORE){
-            pawnScore /= 2;
-        }
-        score += pawnScore;
-
-        return score;
-    }
-
-//    public int getDistance(Position p1, Position p2){
-//        return 1;
-//    }
-
     public boolean isSameTeam(Position p1, Position p2, Board board){
         Piece sourcePiece = board.findPieceByPosition(p1);
         Piece targetPiece = board.findPieceByPosition(p2);
