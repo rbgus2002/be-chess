@@ -9,8 +9,8 @@ public class Game {
     private final String MOVE = "move";
 
     private Board board;
-    private InputView inputView;
-    private OutputView outputView;
+    private final InputView inputView;
+    private final OutputView outputView;
     private boolean gameContinue;
 
     public Game() {
