@@ -4,14 +4,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import softeer2nd.pieces.Piece;
+import softeer2nd.pieces.*;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static softeer2nd.pieces.Piece.Color.*;
-import static softeer2nd.pieces.Piece.Type.*;
+import static softeer2nd.chess.Color.BLACK;
+import static softeer2nd.chess.Color.WHITE;
 import static softeer2nd.utils.StringUtils.appendNewLine;
 
 class BoardTest {
@@ -38,50 +38,6 @@ class BoardTest {
                         appendNewLine("pppppppp") +
                         appendNewLine("rnbqkbnr"),
                 board.showBoard());
-    }
-
-    @Nested
-    class GetPieceCount {
-        @Test
-        @DisplayName("체스판에서 전체 기물의 개수를 가져온다")
-        void getAllPieceCount() {
-            // given, when
-            board.initialize();
-
-            // then
-            assertEquals(PIECE_COUNT, board.getPieceCount());
-        }
-
-        @Test
-        @DisplayName("체스판에서 특정 기물의 개수를 가져온다")
-        void getSpecificPieceCount() {
-            // given
-            final int PAWN_COUNT = 8;
-            final int ROOK_COUNT = 2;
-            final int BISHOP_COUNT = 2;
-            final int KNIGHT_COUNT = 2;
-            final int QUEEN_COUNT = 1;
-            final int KING_COUNT = 1;
-
-            // when
-            board.initialize();
-
-            // then
-            assertAll(
-                    () -> assertEquals(PAWN_COUNT, board.getPieceCount(PAWN, WHITE)),
-                    () -> assertEquals(PAWN_COUNT, board.getPieceCount(PAWN, BLACK)),
-                    () -> assertEquals(ROOK_COUNT, board.getPieceCount(ROOK, WHITE)),
-                    () -> assertEquals(ROOK_COUNT, board.getPieceCount(ROOK, BLACK)),
-                    () -> assertEquals(BISHOP_COUNT, board.getPieceCount(BISHOP, WHITE)),
-                    () -> assertEquals(BISHOP_COUNT, board.getPieceCount(BISHOP, BLACK)),
-                    () -> assertEquals(KNIGHT_COUNT, board.getPieceCount(KNIGHT, WHITE)),
-                    () -> assertEquals(KNIGHT_COUNT, board.getPieceCount(KNIGHT, BLACK)),
-                    () -> assertEquals(QUEEN_COUNT, board.getPieceCount(QUEEN, WHITE)),
-                    () -> assertEquals(QUEEN_COUNT, board.getPieceCount(QUEEN, BLACK)),
-                    () -> assertEquals(KING_COUNT, board.getPieceCount(KING, WHITE)),
-                    () -> assertEquals(KING_COUNT, board.getPieceCount(KING, BLACK))
-            );
-        }
     }
 
     @Nested
@@ -115,8 +71,9 @@ class BoardTest {
 
             // then
             assertAll(
-                    () -> assertTrue(board.findPieceByPosition(Position.of("a8")).isSameTypeAndColor(ROOK, BLACK)),
-                    () -> assertTrue(board.findPieceByPosition(Position.of("e1")).isSameTypeAndColor(KING, WHITE))
+                    () -> assertEquals(BLACK, board.findPieceByPosition(Position.of("a8")).getColor()),
+                    () -> assertEquals(Rook.from(BLACK), board.findPieceByPosition(Position.of("a8"))),
+                    () -> assertEquals(King.from(WHITE), board.findPieceByPosition(Position.of("e1")))
             );
         }
     }
@@ -142,7 +99,7 @@ class BoardTest {
         board.initializeEmpty();
 
         // when
-        Piece blackPawn = Piece.createBlackPawn();
+        Piece blackPawn = Pawn.from(BLACK);
         Position position = Position.of("c5");
         board.insertPiece(position, blackPawn);
 
@@ -159,19 +116,18 @@ class BoardTest {
             board.initializeEmpty();
 
             // when
-            board.insertPiece(Position.of("b6"), Piece.createBlackPawn());
-            board.insertPiece(Position.of("e6"), Piece.createBlackQueen());
-            board.insertPiece(Position.of("b8"), Piece.createBlackKing());
-            board.insertPiece(Position.of("c8"), Piece.createBlackRook());
-
-            board.insertPiece(Position.of("f2"), Piece.createWhitePawn());
-            board.insertPiece(Position.of("g2"), Piece.createWhitePawn());
-            board.insertPiece(Position.of("e1"), Piece.createWhiteRook());
-            board.insertPiece(Position.of("f1"), Piece.createWhiteKing());
+            board.insertPiece(Position.of("b6"), Pawn.from(BLACK));
+            board.insertPiece(Position.of("e6"), Queen.from(BLACK));
+            board.insertPiece(Position.of("b8"), King.from(BLACK));
+            board.insertPiece(Position.of("c8"), Rook.from(BLACK));
+            board.insertPiece(Position.of("f2"), Pawn.from(WHITE));
+            board.insertPiece(Position.of("g2"), Pawn.from(WHITE));
+            board.insertPiece(Position.of("e1"), Rook.from(WHITE));
+            board.insertPiece(Position.of("f1"), King.from(WHITE));
 
             // then
-            assertEquals(15.0, board.getScoreOfColor(Piece.Color.BLACK), 0.01);
-            assertEquals(7.0, board.getScoreOfColor(Piece.Color.WHITE), 0.01);
+            assertEquals(15.0, board.getScoreOfColor(BLACK), 0.01);
+            assertEquals(7.0, board.getScoreOfColor(WHITE), 0.01);
             System.out.println(board.showBoard());
         }
 
@@ -182,32 +138,32 @@ class BoardTest {
             board.initializeEmpty();
 
             // when
-            board.insertPiece(Position.of("f2"), Piece.createBlackPawn());
-            board.insertPiece(Position.of("f3"), Piece.createBlackPawn());
-            board.insertPiece(Position.of("f4"), Piece.createBlackPawn());
+            board.insertPiece(Position.of("f2"), Pawn.from(BLACK));
+            board.insertPiece(Position.of("f3"), Pawn.from(BLACK));
+            board.insertPiece(Position.of("f4"), Pawn.from(BLACK));
 
             // then
-            assertEquals(1.5, board.getScoreOfColor(Piece.Color.BLACK), 0.01);
+            assertEquals(1.5, board.getScoreOfColor(BLACK), 0.01);
             System.out.println(board.showBoard());
         }
     }
-    
+
     @Test
     @DisplayName("현재 체스판에서 특정 색깔의 기물의 점수를 오름차순으로 정렬한다")
     void getPieceListOrderByScoreDesc(){
         // given
         board.initializeEmpty();
 
-        board.insertPiece(Position.of("b1"), Piece.createWhitePawn());
-        board.insertPiece(Position.of("c1"), Piece.createWhiteRook());
-        board.insertPiece(Position.of("d1"), Piece.createWhiteKing());
+        board.insertPiece(Position.of("b1"), Pawn.from(WHITE));
+        board.insertPiece(Position.of("c1"), Rook.from(WHITE));
+        board.insertPiece(Position.of("d1"), King.from(WHITE));
 
         // when
         List<Piece> pieceList = board.getPieceListOrderByScoreDesc(WHITE);
 
         // then
         assertEquals(3, pieceList.size());
-        assertThat(pieceList.get(0).getType().getScore()).isGreaterThan(pieceList.get(1).getType().getScore());
+        assertThat(pieceList.get(0).getScore()).isGreaterThan(pieceList.get(1).getScore());
         System.out.println(pieceList);
     }
 

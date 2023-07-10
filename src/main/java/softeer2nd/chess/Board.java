@@ -1,15 +1,15 @@
 package softeer2nd.chess;
 
+import softeer2nd.pieces.Blank;
+import softeer2nd.pieces.Pawn;
 import softeer2nd.pieces.Piece;
-import softeer2nd.pieces.Rank;
+//import softeer2nd.chess.Rank;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static softeer2nd.pieces.Piece.*;
-import static softeer2nd.pieces.Piece.Type.PAWN;
 import static softeer2nd.utils.StringUtils.*;
 
 public class Board {
@@ -43,28 +43,6 @@ public class Board {
         return sb.toString();
     }
 
-    /**
-     * 체스판에서 전체 기물의 개수를 가져온다.
-     */
-    public int getPieceCount() {
-        int size = 0;
-        for (Rank rank : board) {
-            size += rank.getPieceCount();
-        }
-        return size;
-    }
-
-    /**
-     * 체스판에서 종류와 색깔이 일치하는 기물의 개수를 가져온다.
-     */
-    public int getPieceCount(Type type, Color color) {
-        int size = 0;
-        for (Rank rank : board) {
-            size += rank.getPieceCount(type, color);
-        }
-        return size;
-    }
-
     public Piece findPieceByPosition(Position position) {
         return board.get(position.getRank()).getPieceAt(position.getFileToInt());
     }
@@ -91,14 +69,14 @@ public class Board {
                 continue;
             }
 
-            if(piece.isPawn()){
-                pawnScore += piece.getType().getScore();
+            if(piece.isTypeOf(Pawn.class)){
+                pawnScore += piece.getScore();
             }else{
-                score += piece.getType().getScore();
+                score += piece.getScore();
             }
         }
 
-        if(pawnScore > PAWN.getScore()){
+        if(pawnScore > Pawn.SCORE){
             pawnScore /= 2;
         }
         score += pawnScore;
@@ -114,7 +92,7 @@ public class Board {
         Collections.sort(pieceList, new Comparator<Piece>() {
             @Override
             public int compare(Piece o1, Piece o2) {
-                return Double.compare(o2.getType().getScore(), o1.getType().getScore());
+                return Double.compare(o2.getScore(), o1.getScore());
             }
         });
         return pieceList;
@@ -122,6 +100,6 @@ public class Board {
 
     public void move(Position source, Position target){
         insertPiece(target, findPieceByPosition(source));
-        insertPiece(source, Piece.createBlank());
+        insertPiece(source, Blank.create());
     }
 }
