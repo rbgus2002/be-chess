@@ -7,6 +7,7 @@ import softeer2nd.chess.Position;
 import softeer2nd.utils.Board;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static softeer2nd.utils.PositionFactory.*;
 
 class QueenTest extends Board {
     @Test
@@ -14,13 +15,10 @@ class QueenTest extends Board {
     void moveHorizontal(){
         // given
         board.initializeEmpty();
-
         Piece queen = Queen.from(Color.WHITE);
-        Position p1 = Position.of("d1");
-        Position p2 = Position.of("g1");
 
         // when
-        boolean move = queen.canMove(p1, p2, board);
+        boolean move = queen.canMove(D1, G1, board);
 
         // then
         assertTrue(move);
@@ -31,13 +29,10 @@ class QueenTest extends Board {
     void moveVertical(){
         // given
         board.initializeEmpty();
-
         Piece queen = Queen.from(Color.WHITE);
-        Position p1 = Position.of("d1");
-        Position p2 = Position.of("d5");
 
         // when
-        boolean move = queen.canMove(p1, p2, board);
+        boolean move = queen.canMove(D1, D5, board);
 
         // then
         assertTrue(move);
@@ -48,13 +43,10 @@ class QueenTest extends Board {
     void moveDiagonal(){
         // given
         board.initializeEmpty();
-
         Piece queen = Queen.from(Color.WHITE);
-        Position p1 = Position.of("d1");
-        Position p2 = Position.of("h5");
 
         // when
-        boolean move = queen.canMove(p1, p2, board);
+        boolean move = queen.canMove(D1, H5, board);
 
         // then
         assertTrue(move);

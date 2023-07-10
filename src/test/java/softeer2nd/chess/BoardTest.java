@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import softeer2nd.pieces.*;
+import softeer2nd.utils.PositionFactory;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static softeer2nd.chess.Color.BLACK;
 import static softeer2nd.chess.Color.WHITE;
+import static softeer2nd.utils.PositionFactory.*;
 import static softeer2nd.utils.StringUtils.appendNewLine;
 
 class BoardTest {
@@ -71,9 +73,9 @@ class BoardTest {
 
             // then
             assertAll(
-                    () -> assertEquals(BLACK, board.findPieceByPosition(Position.of("a8")).getColor()),
-                    () -> assertEquals(Rook.from(BLACK), board.findPieceByPosition(Position.of("a8"))),
-                    () -> assertEquals(King.from(WHITE), board.findPieceByPosition(Position.of("e1")))
+                    () -> assertEquals(BLACK, board.findPieceByPosition(A8).getColor()),
+                    () -> assertEquals(Rook.from(BLACK), board.findPieceByPosition(A8)),
+                    () -> assertEquals(King.from(WHITE), board.findPieceByPosition(E1))
             );
         }
     }
@@ -100,7 +102,7 @@ class BoardTest {
 
         // when
         Piece blackPawn = Pawn.from(BLACK);
-        Position position = Position.of("c5");
+        Position position = C5;
         board.insertPiece(position, blackPawn);
 
         // then
@@ -116,14 +118,14 @@ class BoardTest {
             board.initializeEmpty();
 
             // when
-            board.insertPiece(Position.of("b6"), Pawn.from(BLACK));
-            board.insertPiece(Position.of("e6"), Queen.from(BLACK));
-            board.insertPiece(Position.of("b8"), King.from(BLACK));
-            board.insertPiece(Position.of("c8"), Rook.from(BLACK));
-            board.insertPiece(Position.of("f2"), Pawn.from(WHITE));
-            board.insertPiece(Position.of("g2"), Pawn.from(WHITE));
-            board.insertPiece(Position.of("e1"), Rook.from(WHITE));
-            board.insertPiece(Position.of("f1"), King.from(WHITE));
+            board.insertPiece(B6, Pawn.from(BLACK));
+            board.insertPiece(E6, Queen.from(BLACK));
+            board.insertPiece(B8, King.from(BLACK));
+            board.insertPiece(C8, Rook.from(BLACK));
+            board.insertPiece(F2, Pawn.from(WHITE));
+            board.insertPiece(G2, Pawn.from(WHITE));
+            board.insertPiece(E1, Rook.from(WHITE));
+            board.insertPiece(F1, King.from(WHITE));
 
             // then
             assertEquals(15.0, board.getScoreOfColor(BLACK), 0.01);
@@ -138,9 +140,9 @@ class BoardTest {
             board.initializeEmpty();
 
             // when
-            board.insertPiece(Position.of("f2"), Pawn.from(BLACK));
-            board.insertPiece(Position.of("f3"), Pawn.from(BLACK));
-            board.insertPiece(Position.of("f4"), Pawn.from(BLACK));
+            board.insertPiece(F2, Pawn.from(BLACK));
+            board.insertPiece(F3, Pawn.from(BLACK));
+            board.insertPiece(F4, Pawn.from(BLACK));
 
             // then
             assertEquals(1.5, board.getScoreOfColor(BLACK), 0.01);
@@ -154,9 +156,9 @@ class BoardTest {
         // given
         board.initializeEmpty();
 
-        board.insertPiece(Position.of("b1"), Pawn.from(WHITE));
-        board.insertPiece(Position.of("c1"), Rook.from(WHITE));
-        board.insertPiece(Position.of("d1"), King.from(WHITE));
+        board.insertPiece(B1, Pawn.from(WHITE));
+        board.insertPiece(C1, Rook.from(WHITE));
+        board.insertPiece(D1, King.from(WHITE));
 
         // when
         List<Piece> pieceList = board.getPieceListOrderByScoreDesc(WHITE);

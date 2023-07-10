@@ -9,6 +9,7 @@ import softeer2nd.utils.Board;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static softeer2nd.chess.Color.*;
+import static softeer2nd.utils.PositionFactory.*;
 
 class KingTest extends Board {
     @Test
@@ -30,16 +31,13 @@ class KingTest extends Board {
         void kingMoveFailureWhenSameTeamPieceExistsInTarget() {
             // given
             board.initializeEmpty();
-
             Piece king = King.from(WHITE);
-            Position source = Position.of("e1");
-            board.insertPiece(source, king);
 
-            Position target = Position.of("e2");
-            board.insertPiece(target, Pawn.from(WHITE));
+            board.insertPiece(E1, king);
+            board.insertPiece(E2, Pawn.from(WHITE));
 
             // when
-            boolean move = king.canMove(source, target, board);
+            boolean move = king.canMove(E1, E2, board);
 
             // then
             assertFalse(move);
@@ -51,14 +49,11 @@ class KingTest extends Board {
             // given
             board.initializeEmpty();
 
-            Position source = Position.of("e1");
-            Position target = Position.of("e3");
-
             Piece king = King.from(WHITE);
-            board.insertPiece(source, king);
+            board.insertPiece(E1, king);
 
             // when
-            boolean move = king.canMove(source, target, board);
+            boolean move = king.canMove(E1, E3, board);
 
             // then
             assertFalse(move);
@@ -69,15 +64,12 @@ class KingTest extends Board {
         void moveHorizontalOrVertical() {
             // given
             board.initializeEmpty();
-
-            Position source = Position.of("e1");
-            Position target = Position.of("e2");
-
             Piece king = King.from(WHITE);
-            board.insertPiece(source, king);
+
+            board.insertPiece(E1, king);
 
             // when
-            boolean move = king.canMove(source, target, board);
+            boolean move = king.canMove(E1, E2, board);
 
             // then
             assertTrue(move);
@@ -88,15 +80,12 @@ class KingTest extends Board {
         void moveDiagonal() {
             // given
             board.initializeEmpty();
-
-            Position source = Position.of("e1");
-            Position target = Position.of("f2");
-
             Piece king = King.from(WHITE);
-            board.insertPiece(source, king);
+
+            board.insertPiece(E1, king);
 
             // when
-            boolean move = king.canMove(source, target, board);
+            boolean move = king.canMove(E1, F2, board);
 
             // then
             assertTrue(move);
@@ -109,11 +98,11 @@ class KingTest extends Board {
         // given
         board.initializeEmpty();
         Piece king = King.from(WHITE);
-        board.insertPiece(Position.of("e1"), king);
+        board.insertPiece(E1, king);
 
         // when
-        board.move(Position.of("e1"), Position.of("e2"));
-        Piece moved = board.findPieceByPosition(Position.of("e2"));
+        board.move(E1, E2);
+        Piece moved = board.findPieceByPosition(E2);
 
         // then
         assertEquals(king, moved);
