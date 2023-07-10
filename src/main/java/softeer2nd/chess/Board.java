@@ -102,6 +102,13 @@ public class Board {
 //        return 1;
 //    }
 
+    public boolean isSameTeam(Position p1, Position p2, Board board){
+        Piece sourcePiece = board.findPieceByPosition(p1);
+        Piece targetPiece = board.findPieceByPosition(p2);
+
+        return sourcePiece.isSameColor(targetPiece.getColor());
+    }
+
     public void move(Position source, Position target){
         Piece sourcePiece = findPieceByPosition(source);
         if(!sourcePiece.canMove(source, target, this)){

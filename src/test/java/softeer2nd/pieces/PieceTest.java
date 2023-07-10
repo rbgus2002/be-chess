@@ -1,6 +1,7 @@
 package softeer2nd.pieces;
 
 import org.junit.jupiter.api.*;
+import softeer2nd.chess.Board;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;

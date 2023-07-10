@@ -21,7 +21,7 @@ public class King extends Piece {
      */
     @Override
     public boolean canMove(Position source, Position target, Board board) {
-        if (isSameTeam(source, target, board)) {
+        if (board.isSameTeam(source, target, board)) {
             return false;
         }
         if (!verifyKingMove(source, target)) {

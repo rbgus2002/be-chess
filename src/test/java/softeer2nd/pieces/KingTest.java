@@ -4,20 +4,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import softeer2nd.chess.Board;
 import softeer2nd.chess.Position;
+import softeer2nd.utils.Board;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static softeer2nd.chess.Color.*;
 
-class KingTest {
-    private Board board;
-
-    @BeforeEach
-    void initBoard() {
-        board = new Board();
-    }
-
+class KingTest extends Board {
     @Test
     @DisplayName("King을 생성한다")
     void createKing() {

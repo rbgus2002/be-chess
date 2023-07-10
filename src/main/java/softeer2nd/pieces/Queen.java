@@ -15,6 +15,16 @@ public class Queen extends Piece{
 
     @Override
     public boolean canMove(Position source, Position target, Board board) {
-        return false;
+        if (board.isSameTeam(source, target, board)) {
+            return false;
+        }
+        if(!verifyQueenMove(source, target)){
+            return false;
+        }
+        return true;
+    }
+
+    private boolean verifyQueenMove(Position source, Position target){
+        return source.isHorizontal(target) || source.isVertical(target) || source.isDiagonal(target);
     }
 }
