@@ -69,9 +69,8 @@ public class Board {
         return board.get(position.getRank()).getPieceAt(position.getFileToInt());
     }
 
-    // TODO : 추후 미션6에서 Move class로 분리 필수
-    public void board(Position position, Piece blackPawn) {
-        board.get(position.getRank()).insertPiece(blackPawn, position.getFileToInt());
+    public void insertPiece(Position position, Piece piece) {
+        board.get(position.getRank()).insertPiece(piece, position.getFileToInt());
     }
 
     public double getScoreOfColor(Color color) {
@@ -119,5 +118,10 @@ public class Board {
             }
         });
         return pieceList;
+    }
+
+    public void move(Position source, Position target){
+        insertPiece(target, findPieceByPosition(source));
+        insertPiece(source, Piece.createBlank());
     }
 }

@@ -144,7 +144,7 @@ class BoardTest {
         // when
         Piece blackPawn = Piece.createBlackPawn();
         Position position = Position.of("c5");
-        board.board(position, blackPawn);
+        board.insertPiece(position, blackPawn);
 
         // then
         assertEquals(blackPawn, board.findPieceByPosition(position));
@@ -159,15 +159,15 @@ class BoardTest {
             board.initializeEmpty();
 
             // when
-            board.board(Position.of("b6"), Piece.createBlackPawn());
-            board.board(Position.of("e6"), Piece.createBlackQueen());
-            board.board(Position.of("b8"), Piece.createBlackKing());
-            board.board(Position.of("c8"), Piece.createBlackRook());
+            board.insertPiece(Position.of("b6"), Piece.createBlackPawn());
+            board.insertPiece(Position.of("e6"), Piece.createBlackQueen());
+            board.insertPiece(Position.of("b8"), Piece.createBlackKing());
+            board.insertPiece(Position.of("c8"), Piece.createBlackRook());
 
-            board.board(Position.of("f2"), Piece.createWhitePawn());
-            board.board(Position.of("g2"), Piece.createWhitePawn());
-            board.board(Position.of("e1"), Piece.createWhiteRook());
-            board.board(Position.of("f1"), Piece.createWhiteKing());
+            board.insertPiece(Position.of("f2"), Piece.createWhitePawn());
+            board.insertPiece(Position.of("g2"), Piece.createWhitePawn());
+            board.insertPiece(Position.of("e1"), Piece.createWhiteRook());
+            board.insertPiece(Position.of("f1"), Piece.createWhiteKing());
 
             // then
             assertEquals(15.0, board.getScoreOfColor(Piece.Color.BLACK), 0.01);
@@ -182,9 +182,9 @@ class BoardTest {
             board.initializeEmpty();
 
             // when
-            board.board(Position.of("f2"), Piece.createBlackPawn());
-            board.board(Position.of("f3"), Piece.createBlackPawn());
-            board.board(Position.of("f4"), Piece.createBlackPawn());
+            board.insertPiece(Position.of("f2"), Piece.createBlackPawn());
+            board.insertPiece(Position.of("f3"), Piece.createBlackPawn());
+            board.insertPiece(Position.of("f4"), Piece.createBlackPawn());
 
             // then
             assertEquals(1.5, board.getScoreOfColor(Piece.Color.BLACK), 0.01);
@@ -198,9 +198,9 @@ class BoardTest {
         // given
         board.initializeEmpty();
 
-        board.board(Position.of("b1"), Piece.createWhitePawn());
-        board.board(Position.of("c1"), Piece.createWhiteRook());
-        board.board(Position.of("d1"), Piece.createWhiteKing());
+        board.insertPiece(Position.of("b1"), Piece.createWhitePawn());
+        board.insertPiece(Position.of("c1"), Piece.createWhiteRook());
+        board.insertPiece(Position.of("d1"), Piece.createWhiteKing());
 
         // when
         List<Piece> pieceList = board.getPieceListOrderByScoreDesc(WHITE);
@@ -209,5 +209,24 @@ class BoardTest {
         assertEquals(3, pieceList.size());
         assertThat(pieceList.get(0).getType().getScore()).isGreaterThan(pieceList.get(1).getType().getScore());
         System.out.println(pieceList);
+    }
+
+    @Nested
+    class Move{
+        @Test
+        @DisplayName("기물을 특정 위치로 이동한다")
+        void moveAbsolutely(){
+            // given
+            board.initializeEmpty();
+            String source = "b2";
+            String target = "b3";
+
+            // when
+            Piece sourcePiece = board.findPieceByPosition(Position.of(source));
+            board.move(Position.of(source), Position.of(target));
+
+            // then
+            assertEquals(sourcePiece, board.findPieceByPosition(Position.of(target)));
+        }
     }
 }

@@ -105,9 +105,8 @@ public class Rank {
         return pieces.get(file);
     }
 
-    // TODO : Move class 분리하면서 refactoring
-    public void insertPiece(Piece newPiece, int file){
-        pieces.set(file, newPiece);
+    public void insertPiece(Piece piece, int file){
+        pieces.set(file, piece);
     }
 
     @Override
