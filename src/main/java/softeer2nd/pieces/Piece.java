@@ -6,8 +6,7 @@ import softeer2nd.chess.Position;
 
 import java.util.Objects;
 
-import static softeer2nd.chess.Color.BLACK;
-import static softeer2nd.chess.Color.WHITE;
+import static softeer2nd.chess.Color.*;
 
 public abstract class Piece {
     private final Color color;
@@ -36,13 +35,10 @@ public abstract class Piece {
     }
 
     public boolean isSameColor(Color color) {
-        return this.color == color;
-    }
-    public boolean isSameTeam(Position p1, Position p2, Board board){
-        Piece sourcePiece = board.findPieceByPosition(p1);
-        Piece targetPiece = board.findPieceByPosition(p2);
+        if(color == NONE)
+            return false;
 
-        return sourcePiece.isSameColor(targetPiece.getColor());
+        return this.color == color;
     }
 
     public String getRepresentation() {
