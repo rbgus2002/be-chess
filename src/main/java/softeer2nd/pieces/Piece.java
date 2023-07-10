@@ -68,4 +68,9 @@ public abstract class Piece {
     public int hashCode() {
         return Objects.hash(color, representation);
     }
+
+    @Override
+    public String toString() {
+        return representation;
+    }
 }

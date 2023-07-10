@@ -16,9 +16,4 @@ public class Knight extends Piece{
     boolean verifyMove(Position source, Position target) {
         return false;
     }
-
-    @Override
-    public String toString() {
-        return representation;
-    }
 }

@@ -16,14 +16,4 @@ public class Bishop extends Piece{
     boolean verifyMove(Position source, Position target) {
         return false;
     }
-
-//    @Override
-//    boolean isTypeOf(Object obj) {
-//        return obj instanceof Bishop;
-//    }
-
-    @Override
-    public String toString() {
-        return representation;
-    }
 }
