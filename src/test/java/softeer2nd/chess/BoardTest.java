@@ -164,25 +164,5 @@ class BoardTest {
         // then
         assertEquals(3, pieceList.size());
         assertThat(pieceList.get(0).getScore()).isGreaterThan(pieceList.get(1).getScore());
-        System.out.println(pieceList);
-    }
-
-    @Nested
-    class Move{
-        @Test
-        @DisplayName("기물을 특정 위치로 이동한다")
-        void moveAbsolutely(){
-            // given
-            board.initializeEmpty();
-            String source = "b2";
-            String target = "b3";
-
-            // when
-            Piece sourcePiece = board.findPieceByPosition(Position.of(source));
-            board.move(Position.of(source), Position.of(target));
-
-            // then
-            assertEquals(sourcePiece, board.findPieceByPosition(Position.of(target)));
-        }
     }
 }

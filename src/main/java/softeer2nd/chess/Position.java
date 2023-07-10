@@ -1,12 +1,12 @@
 package softeer2nd.chess;
 
 public class Position {
-    private char file;
+    private int file;
     private int rank;
 
     private Position(String position) {
         validate(position);
-        this.file = position.charAt(0);
+        this.file = position.charAt(0) - 'a';
         this.rank = (position.charAt(1) - '0') - 1; // idx 0부터 시작하기 때문에 -1
     }
 
@@ -39,11 +39,36 @@ public class Position {
         return rank >= '1' && rank <= '8';
     }
 
-    public int getFileToInt() {
-        return file - 'a';
+    public int getFile() {
+        return file;
     }
 
     public int getRank() {
         return rank;
+    }
+
+    public boolean isVertical(Position target){
+        return this.file == target.file;
+    }
+
+    public boolean isHorizontal(Position target){
+        return this.rank == target.rank;
+    }
+
+    public boolean isDiagonal(Position target){
+        return getFileDistance(target) == getRankDistance(target);
+    }
+
+    public int getFileDistance(Position target) {
+        return Math.abs(this.rank - target.rank);
+    }
+
+    public int getRankDistance(Position target) {
+        return Math.abs(this.file - target.file);
+    }
+
+    @Override
+    public String toString() {
+        return (char)(file + 'a') + Integer.toString(rank + 1);
     }
 }

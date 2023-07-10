@@ -1,5 +1,6 @@
 package softeer2nd.pieces;
 
+import softeer2nd.chess.Board;
 import softeer2nd.chess.Color;
 import softeer2nd.chess.Position;
 
@@ -37,6 +38,12 @@ public abstract class Piece {
     public boolean isSameColor(Color color) {
         return this.color == color;
     }
+    public boolean isSameTeam(Position p1, Position p2, Board board){
+        Piece sourcePiece = board.findPieceByPosition(p1);
+        Piece targetPiece = board.findPieceByPosition(p2);
+
+        return sourcePiece.isSameColor(targetPiece.getColor());
+    }
 
     public String getRepresentation() {
         return representation;
@@ -54,7 +61,7 @@ public abstract class Piece {
         return target.isInstance(this);
     }
 
-    abstract boolean verifyMove(Position source, Position target);
+    abstract public boolean canMove(Position source, Position target, Board board);
 
     @Override
     public boolean equals(Object o) {

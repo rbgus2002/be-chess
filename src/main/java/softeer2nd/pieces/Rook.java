@@ -1,5 +1,6 @@
 package softeer2nd.pieces;
 
+import softeer2nd.chess.Board;
 import softeer2nd.chess.Color;
 import softeer2nd.chess.Position;
 
@@ -13,7 +14,7 @@ public class Rook extends Piece{
     }
 
     @Override
-    boolean verifyMove(Position source, Position target) {
+    public boolean canMove(Position source, Position target, Board board) {
         return false;
     }
 }

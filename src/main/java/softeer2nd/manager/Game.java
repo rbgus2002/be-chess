@@ -52,9 +52,19 @@ public class Game {
         String source = inputs[1];
         String target = inputs[2];
 
+        verifySameSourceAndTarget(source, target);
+
         board.move(Position.of(source), Position.of(target));
     }
 
+    private void verifySameSourceAndTarget(String source, String target) {
+        if(source.equals(target)){
+            throw new IllegalArgumentException("같은 자리로 이동할 수 없습니다.");
+        }
+    }
+
+
+    // TODO : 유효성 검증하는 메소드 이름 통일
     private void verifyInput(String input){
         if(input.equals(START) || input.equals(END) || input.startsWith(MOVE)){
             return;

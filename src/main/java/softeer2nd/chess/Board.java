@@ -44,11 +44,11 @@ public class Board {
     }
 
     public Piece findPieceByPosition(Position position) {
-        return board.get(position.getRank()).getPieceAt(position.getFileToInt());
+        return board.get(position.getRank()).getPieceAt(position.getFile());
     }
 
     public void insertPiece(Position position, Piece piece) {
-        board.get(position.getRank()).insertPiece(piece, position.getFileToInt());
+        board.get(position.getRank()).insertPiece(piece, position.getFile());
     }
 
     public double getScoreOfColor(Color color) {
@@ -98,8 +98,17 @@ public class Board {
         return pieceList;
     }
 
+//    public int getDistance(Position p1, Position p2){
+//        return 1;
+//    }
+
     public void move(Position source, Position target){
-        insertPiece(target, findPieceByPosition(source));
+        Piece sourcePiece = findPieceByPosition(source);
+        if(!sourcePiece.canMove(source, target, this)){
+            throw new IllegalArgumentException(sourcePiece + "는 " + target + "으로 움직일 수 없습니다.");
+        }
+
+        insertPiece(target, sourcePiece);
         insertPiece(source, Blank.create());
     }
 }
