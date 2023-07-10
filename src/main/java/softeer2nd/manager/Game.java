@@ -1,44 +1,65 @@
 package softeer2nd.manager;
 
 import softeer2nd.chess.Board;
-
-import java.util.Scanner;
+import softeer2nd.chess.Position;
 
 public class Game {
+    private final String START = "start";
+    private final String END = "end";
+    private final String MOVE = "move";
+
     private Board board;
+    private InputView inputView;
+    private OutputView outputView;
+    private boolean gameContinue;
 
     public Game() {
         this.board = new Board();
+        this.inputView = new InputView();
+        this.outputView = new OutputView();
+        this.gameContinue = true;
     }
 
     public void run() {
-        System.out.println("game start!");
+        outputView.printToStart();
+        board.initialize();
 
-        while (true){
-            board.initialize();
-
-            System.out.println("input : 'start' | 'end'");
-
-            Scanner in = new Scanner(System.in);
-            String input = in.next();
-
-            if(!verifyInput(input))
-                break;
-
-            System.out.println(board.showBoard());
+        try{
+            do {
+                instruct(inputView.read());
+                outputView.printBoard(board);
+            }while (gameContinue);
+        }catch (IllegalArgumentException e){
+            outputView.printError(e);
+            run();
         }
 
-        System.out.println("game end!");
+        outputView.printToEnd();
     }
 
-    private boolean verifyInput(String input){
-        if(input.equals("start"))
-            return true;
-        else{
-            if(!input.equals("end")){
-                System.out.println("Input Error!"); // TODO : Exception 생성 (Business Exception => InvalidInputException이 적당할듯)
-            }
-            return false;
+    private void instruct(String input) {
+        verifyInput(input);
+
+        if(input.startsWith(MOVE)){
+            move(input);
+        }else if(input.equals(END)){
+            gameContinue = false;
         }
+    }
+
+    private void move(String input) {
+        String[] inputs = input.split(" ");
+        String source = inputs[1];
+        String target = inputs[2];
+
+        board.move(Position.of(source), Position.of(target));
+    }
+
+    private void verifyInput(String input){
+        if(input.equals(START) || input.equals(END) || input.startsWith(MOVE)){
+            return;
+        }
+
+        throw new IllegalArgumentException("잘못된 명령어입니다.");
     }
 }
