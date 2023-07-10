@@ -149,22 +149,4 @@ class BoardTest {
             System.out.println(board.showBoard());
         }
     }
-
-    @Test
-    @DisplayName("현재 체스판에서 특정 색깔의 기물의 점수를 오름차순으로 정렬한다")
-    void getPieceListOrderByScoreDesc(){
-        // given
-        board.initializeEmpty();
-
-        board.insertPiece(B1, Pawn.from(WHITE));
-        board.insertPiece(C1, Rook.from(WHITE));
-        board.insertPiece(D1, King.from(WHITE));
-
-        // when
-        List<Piece> pieceList = board.getPieceListOrderByScoreDesc(WHITE);
-
-        // then
-        assertEquals(3, pieceList.size());
-        assertThat(pieceList.get(0).getScore()).isGreaterThan(pieceList.get(1).getScore());
-    }
 }

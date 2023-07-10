@@ -84,20 +84,6 @@ public class Board {
         return score;
     }
 
-    public List<Piece> getPieceListOrderByScoreDesc(Color color) {
-        List<Piece> pieceList = new ArrayList<>();
-        for(Rank rank : board){
-            rank.addPieceOfSameColor(pieceList, color);
-        }
-        Collections.sort(pieceList, new Comparator<Piece>() {
-            @Override
-            public int compare(Piece o1, Piece o2) {
-                return Double.compare(o2.getScore(), o1.getScore());
-            }
-        });
-        return pieceList;
-    }
-
 //    public int getDistance(Position p1, Position p2){
 //        return 1;
 //    }
@@ -110,12 +96,19 @@ public class Board {
     }
 
     public void move(Position source, Position target){
+        validateMove(source, target);
+        moveExecution(source, target);
+    }
+
+    private void moveExecution(Position source, Position target) {
+        insertPiece(target, findPieceByPosition(source));
+        insertPiece(source, Blank.create());
+    }
+
+    private void validateMove(Position source, Position target){
         Piece sourcePiece = findPieceByPosition(source);
         if(!sourcePiece.canMove(source, target, this)){
             throw new IllegalArgumentException(sourcePiece + "는 " + target + "으로 움직일 수 없습니다.");
         }
-
-        insertPiece(target, sourcePiece);
-        insertPiece(source, Blank.create());
     }
 }
