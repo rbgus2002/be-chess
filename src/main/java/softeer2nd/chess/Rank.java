@@ -14,10 +14,10 @@ public class Rank {
     private Rank(int line) {
         switch (line) {
             case 1:
-                setFirstLine(WHITE);
+                setFirstLineOf(WHITE);
                 break;
             case 2:
-                setSecondLine(WHITE);
+                setSecondLineOf(WHITE);
                 break;
             case 3:
             case 4:
@@ -26,10 +26,10 @@ public class Rank {
                 setBlankLine();
                 break;
             case 7:
-                setSecondLine(BLACK);
+                setSecondLineOf(BLACK);
                 break;
             case 8:
-                setFirstLine(BLACK);
+                setFirstLineOf(BLACK);
                 break;
             default:
                 throw new IllegalArgumentException("잘못된 line 입력 입니다.");
@@ -44,7 +44,7 @@ public class Rank {
         return new Rank(line);
     }
 
-    private void setFirstLine(Color color) {
+    private void setFirstLineOf(Color color) {
         pieces.add(Rook.from(color));
         pieces.add(Knight.from(color));
         pieces.add(Bishop.from(color));
@@ -55,7 +55,7 @@ public class Rank {
         pieces.add(Rook.from(color));
     }
 
-    private void setSecondLine(Color color) {
+    private void setSecondLineOf(Color color) {
         for(int col = 1; col <= Board.SIZE; col++){
             pieces.add(Pawn.from(color));
         }
