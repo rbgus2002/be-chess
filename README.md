@@ -67,7 +67,7 @@
         - [X] Rook
         - [X] Bishop
         - [X] Pawn
-        - [ ] Knight
+        - [x] Knight
 - [ ] 미션 7 - 예외 처리
     - [ ] 예외 클래스 추가
     - [ ] 사용자 입력 처리

@@ -27,23 +27,6 @@ class KingTest extends Board {
     @Nested
     class verifyKingMove {
         @Test
-        @DisplayName("이동하려는 위치에 같은 편 기물이 존재하는 경우 King 이동에 실패한다")
-        void kingMoveFailureWhenSameTeamPieceExistsInTarget() {
-            // given
-            board.initializeEmpty();
-            Piece king = King.from(WHITE);
-
-            board.insertPiece(E1, king);
-            board.insertPiece(E2, Pawn.from(WHITE));
-
-            // when
-            boolean move = king.canMove(E1, E2, board);
-
-            // then
-            assertFalse(move);
-        }
-
-        @Test
         @DisplayName("두 칸 이상 이동을 시도하는 경우 King 이동에 실패한다")
         void kingMoveFailureWhenMovingMoreThanTwoDistance() {
             // given

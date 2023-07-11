@@ -64,6 +64,18 @@ class PieceTest {
         assertTrue(queenType);
         assertFalse(wrongType);
     }
+    
+    @Test
+    @DisplayName("나이트인지 검사한다")
+    void isKnight(){
+        // given, when
+        Piece knight = Knight.from(WHITE);
+        Piece king = King.from(WHITE);
+
+        // then
+        assertTrue(knight.isKnight());
+        assertFalse(king.isKnight());
+    }
 
     @Test
     @DisplayName("빈칸인지 확인한다")

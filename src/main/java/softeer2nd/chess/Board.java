@@ -1,6 +1,7 @@
 package softeer2nd.chess;
 
 import softeer2nd.pieces.Blank;
+import softeer2nd.pieces.Knight;
 import softeer2nd.pieces.Piece;
 
 import java.util.ArrayList;
@@ -61,6 +62,10 @@ public class Board {
     }
 
     private void validateBlocked(Position source, Position target) {
+        // 나이트는 기물 건너 뛸 수 있음
+        if(findPieceByPosition(source).isKnight()){
+            return;
+        }
         int maxSide = source.getMaxSide(target);
         int nextRank = source.getNextRank(target);
         int nextFile = source.getNextFile(target);
