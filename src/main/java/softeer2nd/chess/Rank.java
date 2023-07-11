@@ -83,12 +83,4 @@ public class Rank {
         }
         return sb.toString();
     }
-
-    public void addPieceOfSameColor(List<Piece> pieceList, Color color) {
-        for(Piece piece : pieces){
-            if(piece.isSameColor(color)){
-                pieceList.add(piece);
-            }
-        }
-    }
 }

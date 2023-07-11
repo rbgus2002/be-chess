@@ -38,11 +38,12 @@ public abstract class Piece {
         return isTypeOf(Blank.class);
     }
 
-    public boolean isSameColor(Color color) {
-        if(color == NONE)
+    public boolean isSameColor(Piece piece) {
+        if(piece.isBlank()){
             return false;
+        }
 
-        return this.color == color;
+        return this.color == piece.getColor();
     }
 
     public String getRepresentation() {

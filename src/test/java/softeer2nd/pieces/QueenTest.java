@@ -13,7 +13,7 @@ import static softeer2nd.utils.PositionFactory.*;
 
 class QueenTest extends Board {
     @Test
-    @DisplayName("퀸은 수평으로 이동할 수 있다")
+    @DisplayName("퀸은 수평으로 이동이 가능하다")
     void moveHorizontal(){
         // given
         board.initializeEmpty();
@@ -27,7 +27,7 @@ class QueenTest extends Board {
     }
 
     @Test
-    @DisplayName("퀸은 수직으로 이동할 수 있다")
+    @DisplayName("퀸은 수직으로 이동이 가능하다")
     void moveVertical(){
         // given
         board.initializeEmpty();
@@ -41,7 +41,7 @@ class QueenTest extends Board {
     }
 
     @Test
-    @DisplayName("퀸은 대각선으로 이동할 수 있다")
+    @DisplayName("퀸은 대각선으로 이동이 가능하다")
     void moveDiagonal(){
         // given
         board.initializeEmpty();
@@ -58,7 +58,7 @@ class QueenTest extends Board {
     @Nested
     class moveQueen{
         @Test
-        @DisplayName("퀸은 상하좌우으로 이동 가능하다")
+        @DisplayName("퀸은 상하좌우으로 이동할 수 있다")
         void moveQueenTo상하좌우(){
             // given
             board.initializeEmpty();
@@ -72,7 +72,7 @@ class QueenTest extends Board {
         }
 
         @Test
-        @DisplayName("퀸은 대각선으로 이동 가능하다")
+        @DisplayName("퀸은 대각선으로 이동할 수 있다")
         void moveQueenToDiagonal(){
             // given
             board.initializeEmpty();

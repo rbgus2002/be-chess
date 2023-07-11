@@ -51,7 +51,7 @@ public class Board {
         Piece sourcePiece = board.findPieceByPosition(p1);
         Piece targetPiece = board.findPieceByPosition(p2);
 
-        return sourcePiece.isSameColor(targetPiece.getColor());
+        return sourcePiece.isSameColor(targetPiece);
     }
 
     public void move(Position source, Position target){
