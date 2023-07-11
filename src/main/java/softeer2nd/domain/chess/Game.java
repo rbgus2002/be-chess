@@ -6,8 +6,6 @@ import softeer2nd.domain.pieces.Piece;
 import softeer2nd.utils.Command;
 
 public class Game {
-
-
     private Board board;
     private final InputView inputView;
     private final OutputView outputView;
@@ -83,6 +81,7 @@ public class Game {
     }
 
     private void finishGame(){
+//        outputView.printEnd(); // TODO : 킹이 잡혔음을 알리는 메세지 출력
         gameContinue = false;
     }
 }
