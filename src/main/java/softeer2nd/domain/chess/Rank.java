@@ -1,7 +1,6 @@
 package softeer2nd.domain.chess;
 
 import softeer2nd.domain.pieces.*;
-import softeer2nd.pieces.*;
 
 import java.util.ArrayList;
 import java.util.List;
