@@ -1,13 +1,9 @@
 package softeer2nd.chess;
 
 import softeer2nd.pieces.Blank;
-import softeer2nd.pieces.Pawn;
 import softeer2nd.pieces.Piece;
-//import softeer2nd.chess.Rank;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import static softeer2nd.utils.StringUtils.*;
@@ -60,12 +56,8 @@ public class Board {
 
     public void move(Position source, Position target){
         validateMove(source, target);
+        validateBlocked(source, target);
         moveExecution(source, target);
-    }
-
-    private void moveExecution(Position source, Position target) {
-        insertPiece(target, findPieceByPosition(source));
-        insertPiece(source, Blank.create());
     }
 
     private void validateMove(Position source, Position target){
@@ -73,5 +65,24 @@ public class Board {
         if(!sourcePiece.canMove(source, target, this)){
             throw new IllegalArgumentException(sourcePiece + "는 " + target + "으로 움직일 수 없습니다.");
         }
+    }
+
+    private void validateBlocked(Position source, Position target) {
+        int maxSide = source.getMaxSide(target);
+        int nextRank = source.getNextRank(target);
+        int nextFile = source.getNextFile(target);
+
+        Position now = Position.of(source);
+        for(int i = 0; i < maxSide - 1; i++){
+            now = now.calculateNextPosition(nextRank, nextFile);
+            if(!findPieceByPosition(now).isBlank()){
+                throw new IllegalArgumentException(source + "와 " + target + " 사이에 다른 기물이 존재할 수 없습니다");
+            }
+        }
+    }
+
+    private void moveExecution(Position source, Position target) {
+        insertPiece(target, findPieceByPosition(source));
+        insertPiece(source, Blank.create());
     }
 }

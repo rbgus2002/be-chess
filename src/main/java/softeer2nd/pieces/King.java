@@ -31,13 +31,13 @@ public class King extends Piece {
     }
 
     private boolean verifyKingMove(Position source, Position target) {
-        if(source.isVertical(target) && source.getFileDistance(target) == DISTANCE){
+        if(source.isVertical(target) && Math.abs(source.getFileDistance(target)) == DISTANCE){
             return true;
         }
-        if(source.isHorizontal(target) && source.getRankDistance(target) == DISTANCE){
+        if(source.isHorizontal(target) && Math.abs(source.getRankDistance(target)) == DISTANCE){
             return true;
         }
-        if(source.isDiagonal(target) && source.getRankDistance(target) == DISTANCE && source.getFileDistance(target) == DISTANCE){
+        if(source.isDiagonal(target) && Math.abs(source.getRankDistance(target)) == DISTANCE && Math.abs(source.getFileDistance(target)) == DISTANCE){
             return true;
         }
 

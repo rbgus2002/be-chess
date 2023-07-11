@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static softeer2nd.chess.Color.BLACK;
 import static softeer2nd.chess.Color.WHITE;
+import static softeer2nd.utils.PositionFactory.*;
 
 
 class PieceTest {
@@ -62,5 +63,21 @@ class PieceTest {
         assertTrue(pawnType);
         assertTrue(queenType);
         assertFalse(wrongType);
+    }
+
+    @Test
+    @DisplayName("빈칸인지 확인한다")
+    void isBlank(){
+        // given
+        Board board = new Board();
+        board.initialize();
+
+        // when
+        Piece a1 = board.findPieceByPosition(A1);
+        Piece c3 = board.findPieceByPosition(C3);
+
+        // then
+        assertFalse(a1.isBlank());
+        assertTrue(c3.isBlank());
     }
 }

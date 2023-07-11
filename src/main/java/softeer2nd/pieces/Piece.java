@@ -11,7 +11,7 @@ import static softeer2nd.chess.Color.*;
 public abstract class Piece {
     private final Color color;
     protected final String representation;
-    private final double score;
+    private final double score; // TODO : 삭제 고려
 
     public Piece(Color color, String representation, double score) {
         this.color = color;
@@ -34,6 +34,10 @@ public abstract class Piece {
         return this.color == WHITE;
     }
 
+    public boolean isBlank(){
+        return isTypeOf(Blank.class);
+    }
+
     public boolean isSameColor(Color color) {
         if(color == NONE)
             return false;
@@ -43,10 +47,6 @@ public abstract class Piece {
 
     public String getRepresentation() {
         return representation;
-    }
-
-    public double getScore() {
-        return score;
     }
 
     public Color getColor() {

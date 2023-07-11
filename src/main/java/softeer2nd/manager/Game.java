@@ -20,6 +20,7 @@ public class Game {
         this.gameContinue = true;
     }
 
+    // TODO : Game 객체가 명령어 유효성을 검증해주는게 마음에 들지 않음
     public void run() {
         outputView.printToStart();
         board.initialize();

@@ -1,12 +1,14 @@
 package softeer2nd.pieces;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import softeer2nd.chess.Color;
 import softeer2nd.chess.Position;
 import softeer2nd.utils.Board;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static softeer2nd.chess.Color.WHITE;
 import static softeer2nd.utils.PositionFactory.*;
 
 class QueenTest extends Board {
@@ -15,7 +17,7 @@ class QueenTest extends Board {
     void moveHorizontal(){
         // given
         board.initializeEmpty();
-        Piece queen = Queen.from(Color.WHITE);
+        Piece queen = Queen.from(WHITE);
 
         // when
         boolean move = queen.canMove(D1, G1, board);
@@ -29,7 +31,7 @@ class QueenTest extends Board {
     void moveVertical(){
         // given
         board.initializeEmpty();
-        Piece queen = Queen.from(Color.WHITE);
+        Piece queen = Queen.from(WHITE);
 
         // when
         boolean move = queen.canMove(D1, D5, board);
@@ -43,12 +45,44 @@ class QueenTest extends Board {
     void moveDiagonal(){
         // given
         board.initializeEmpty();
-        Piece queen = Queen.from(Color.WHITE);
+        Piece queen = Queen.from(WHITE);
 
         // when
         boolean move = queen.canMove(D1, H5, board);
 
         // then
         assertTrue(move);
+    }
+
+
+    @Nested
+    class moveQueen{
+        @Test
+        @DisplayName("퀸은 상하좌우으로 이동 가능하다")
+        void moveQueenTo상하좌우(){
+            // given
+            board.initializeEmpty();
+            board.insertPiece(D1, Queen.from(WHITE));
+
+            // when
+            board.move(D1, D5);
+
+            // then
+            assertEquals(Queen.from(WHITE), board.findPieceByPosition(D5));
+        }
+
+        @Test
+        @DisplayName("퀸은 대각선으로 이동 가능하다")
+        void moveQueenToDiagonal(){
+            // given
+            board.initializeEmpty();
+            board.insertPiece(D1, Queen.from(WHITE));
+
+            // when
+            board.move(D1, G4);
+
+            // then
+            assertEquals(Queen.from(WHITE), board.findPieceByPosition(G4));
+        }
     }
 }

@@ -5,11 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import softeer2nd.pieces.*;
-import softeer2nd.utils.PositionFactory;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static softeer2nd.chess.Color.BLACK;
 import static softeer2nd.chess.Color.WHITE;
@@ -17,7 +13,6 @@ import static softeer2nd.utils.PositionFactory.*;
 import static softeer2nd.utils.StringUtils.appendNewLine;
 
 class BoardTest {
-    private final int PIECE_COUNT = 32;
     private Board board;
 
     @BeforeEach
@@ -102,10 +97,21 @@ class BoardTest {
 
         // when
         Piece blackPawn = Pawn.from(BLACK);
-        Position position = C5;
-        board.insertPiece(position, blackPawn);
+        board.insertPiece(C5, blackPawn);
 
         // then
-        assertEquals(blackPawn, board.findPieceByPosition(position));
+        assertEquals(blackPawn, board.findPieceByPosition(C5));
+    }
+
+    @Test
+    @DisplayName("중간에 다른 기물이 존재하면 움직일 수 없다")
+    void existOtherPiece(){
+        // given, when
+        board.initializeEmpty();
+        board.insertPiece(D1, Queen.from(WHITE));
+        board.insertPiece(D2, Pawn.from(WHITE));
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> board.move(D1, D4));
     }
 }
