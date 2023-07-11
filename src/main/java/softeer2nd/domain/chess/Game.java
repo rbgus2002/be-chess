@@ -2,6 +2,7 @@ package softeer2nd.domain.chess;
 
 import softeer2nd.View.InputView;
 import softeer2nd.View.OutputView;
+import softeer2nd.domain.pieces.Piece;
 import softeer2nd.utils.Command;
 
 public class Game {
@@ -41,7 +42,7 @@ public class Game {
 
     private void instruct(Command now) {
         if(now.isEnd()){
-            gameContinue = false;
+            finishGame();
             return;
         }
         if(now.isMove()){
@@ -51,8 +52,11 @@ public class Game {
     }
 
     private void move(Command now) {
+        Piece originalTarget = board.findPieceByPosition(Position.of(now.getTarget()));
+
         verifyMove(now.getSource(), now.getTarget());
         board.move(Position.of(now.getSource()), Position.of(now.getTarget()));
+        checkFinishGame(originalTarget);
     }
 
     private void verifyMove(String source, String target) {
@@ -70,5 +74,15 @@ public class Game {
         if (board.findPieceByPosition(source).isTeam(board.findPieceByPosition(target))) {
             throw new IllegalArgumentException("같은 팀 기물의 위치로 이동할 수 없습니다");
         }
+    }
+
+    private void checkFinishGame(Piece originalTarget) {
+        if(originalTarget.isKing()){
+            finishGame();
+        }
+    }
+
+    private void finishGame(){
+        gameContinue = false;
     }
 }

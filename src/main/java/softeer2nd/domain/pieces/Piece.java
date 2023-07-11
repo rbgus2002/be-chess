@@ -57,6 +57,9 @@ public abstract class Piece {
     public boolean isKnight() {
         return isTypeOf(Knight.class);
     }
+    public boolean isKing() {
+        return isTypeOf(King.class);
+    }
 
     public boolean isTeam(Piece target){
         if(this.isBlank() || target.isBlank())

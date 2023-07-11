@@ -79,6 +79,16 @@ class PieceTest {
     }
 
     @Test
+    @DisplayName("킹인지 검사한다")
+    void isKing(){
+        // given, when
+        Piece king = King.from(WHITE);
+
+        // then
+        assertTrue(king.isKing());
+    }
+
+    @Test
     @DisplayName("빈칸인지 확인한다")
     void isBlank(){
         // given
