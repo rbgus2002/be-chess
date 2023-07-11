@@ -75,6 +75,7 @@ class BoardTest {
         }
     }
 
+
     @Test
     @DisplayName("빈 체스판을 초기화 한다")
     void initializeEmpty() {
@@ -103,15 +104,62 @@ class BoardTest {
         assertEquals(blackPawn, board.findPieceByPosition(C5));
     }
 
-    @Test
-    @DisplayName("중간에 다른 기물이 존재하면 움직일 수 없다")
-    void existOtherPiece(){
-        // given, when
-        board.initializeEmpty();
-        board.insertPiece(D1, Queen.from(WHITE));
-        board.insertPiece(D2, Pawn.from(WHITE));
 
-        // then
-        assertThrows(IllegalArgumentException.class, () -> board.move(D1, D4));
+    @Nested
+    class move{
+        @Test
+        @DisplayName("중간에 다른 기물이 존재하면 움직일 수 없다")
+        void existOtherPiece(){
+            // given, when
+            board.initializeEmpty();
+            board.insertPiece(D1, Queen.from(WHITE));
+            board.insertPiece(D2, Pawn.from(WHITE));
+
+            // then
+            assertThrows(IllegalArgumentException.class, () -> board.move(D1, D4));
+        }
+
+        @Test
+        @DisplayName("비어있는 기물을 이동시킬 수 없다")
+        void canNotMoveBlack(){
+            // given, when
+            board.initializeEmpty();
+
+            // then
+            assertThrows(IllegalArgumentException.class, () -> board.move(D1, D4));
+        }
+    }
+
+
+    @Nested
+    class isEnemy{
+        @Test
+        @DisplayName("목적지 위치에 적이 있이 있으면 true를 반환한다")
+        void existEnemy(){
+            // given
+            board.initializeEmpty();
+            board.insertPiece(A2, Pawn.from(WHITE));
+            board.insertPiece(A3, Pawn.from(BLACK));
+
+            // when
+            boolean enemy = board.findPieceByPosition(A2).isEnemy(board.findPieceByPosition(A3));
+
+            // then
+            assertTrue(enemy);
+        }
+
+        @Test
+        @DisplayName("목적지 위치에 기물이 존재하지 않으면 false를 반환한다")
+        void notExistPiece(){
+            // given
+            board.initializeEmpty();
+            board.insertPiece(A2, Pawn.from(WHITE));
+
+            // when
+            boolean enemy = board.findPieceByPosition(A2).isEnemy(board.findPieceByPosition(A3));
+
+            // then
+            assertFalse(enemy);
+        }
     }
 }

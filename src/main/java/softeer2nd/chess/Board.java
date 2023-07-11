@@ -47,13 +47,6 @@ public class Board {
         board.get(position.getRank()).insertPiece(piece, position.getFile());
     }
 
-    public boolean isSameTeam(Position p1, Position p2, Board board){
-        Piece sourcePiece = board.findPieceByPosition(p1);
-        Piece targetPiece = board.findPieceByPosition(p2);
-
-        return sourcePiece.isSameColor(targetPiece);
-    }
-
     public void move(Position source, Position target){
         validateMove(source, target);
         validateBlocked(source, target);

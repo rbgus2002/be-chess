@@ -15,9 +15,6 @@ public class Queen extends Piece{
 
     @Override
     public boolean canMove(Position source, Position target, Board board) {
-        if (board.isSameTeam(source, target, board)) {
-            return false;
-        }
         if(!verifyQueenMove(source, target)){
             return false;
         }

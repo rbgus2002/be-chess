@@ -50,17 +50,28 @@ public class Game {
 
     private void move(String input) {
         String[] inputs = input.split(" ");
-        String source = inputs[1];
-        String target = inputs[2];
+        Position source = Position.of(inputs[1]);
+        Position target = Position.of(inputs[2]);
 
-        verifySameSourceAndTarget(source, target);
+        verifyMove(inputs[1], inputs[2]);
 
         board.move(Position.of(source), Position.of(target));
     }
 
+    private void verifyMove(String source, String target){
+        verifySameSourceAndTarget(source, target);
+        verifyTarget(Position.of(source), Position.of(target));
+    }
+
+    private void verifyTarget(Position source, Position target) {
+        if(board.findPieceByPosition(source).isTeam(board.findPieceByPosition(target))){
+            throw new IllegalArgumentException("같은 팀 기물의 위치로 이동할 수 없습니다");
+        }
+    }
+
     private void verifySameSourceAndTarget(String source, String target) {
         if(source.equals(target)){
-            throw new IllegalArgumentException("같은 자리로 이동할 수 없습니다.");
+            throw new IllegalArgumentException("시작점과 동일한 위치로 이동할 수 없습니다.");
         }
     }
 

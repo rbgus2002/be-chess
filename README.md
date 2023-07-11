@@ -32,6 +32,6 @@
   - [x] King 
   - [x] Queen
   - [x] Rook
-  - [ ] Bishop
+  - [x] Bishop
   - [ ] Pawn
   - [ ] Knight

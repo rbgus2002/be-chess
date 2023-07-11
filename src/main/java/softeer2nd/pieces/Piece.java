@@ -39,10 +39,6 @@ public abstract class Piece {
     }
 
     public boolean isSameColor(Piece piece) {
-        if(piece.isBlank()){
-            return false;
-        }
-
         return this.color == piece.getColor();
     }
 
@@ -56,6 +52,18 @@ public abstract class Piece {
 
     public boolean isTypeOf(Class<?> target) {
         return target.isInstance(this);
+    }
+
+    public boolean isTeam(Piece target){
+        if(this.isBlank() || target.isBlank())
+            return false;
+        return this.isSameColor(target);
+    }
+
+    public boolean isEnemy(Piece target){
+        if(this.isBlank() || target.isBlank())
+            return false;
+        return !this.isSameColor(target);
     }
 
     abstract public boolean canMove(Position source, Position target, Board board);

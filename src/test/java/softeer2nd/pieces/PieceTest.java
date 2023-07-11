@@ -80,4 +80,15 @@ class PieceTest {
         assertFalse(a1.isBlank());
         assertTrue(c3.isBlank());
     }
+
+    @Test
+    @DisplayName("같은 색인지 검사한다.")
+    void isSameColor(){
+        // given, when
+        Piece whitePawn = Pawn.from(WHITE);
+        Piece whiteQueen = Queen.from(WHITE);
+
+        // then
+        assertTrue(whitePawn.isSameColor(whiteQueen));
+    }
 }
