@@ -5,17 +5,16 @@ import softeer2nd.domain.chess.Board;
 import softeer2nd.utils.StringUtils;
 
 public class OutputView {
-    public void printToStart(){
+    public void printStart(){
         StringBuilder sb = new StringBuilder();
         sb.append(StringUtils.appendNewLine("Game Start!"));
-        sb.append(StringUtils.appendNewLine("1. start"));
+        sb.append(StringUtils.appendNewLine("1. start (show board)"));
         sb.append(StringUtils.appendNewLine("2. move"));
         sb.append(StringUtils.appendNewLine("3. end"));
-
         System.out.print(sb);
     }
 
-    public void printToEnd(){
+    public void printEnd(){
         System.out.println("Game End!");
     }
 
@@ -24,6 +23,14 @@ public class OutputView {
     }
 
     public void printError(RuntimeException e){
-        System.out.println("[ERROR] : " + e.getMessage());
+        StringBuilder sb = new StringBuilder();
+        sb.append("[ERROR] : ");
+        sb.append(StringUtils.appendNewLine((e.getMessage())));
+        sb.append("명령어를 다시 입력해주세요");
+        System.out.println(sb);
+    }
+
+    public void printContinue() {
+        System.out.println("계속 진행하세요");
     }
 }
