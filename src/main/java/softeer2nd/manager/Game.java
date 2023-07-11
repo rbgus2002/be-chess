@@ -50,12 +50,8 @@ public class Game {
 
     private void move(String input) {
         String[] inputs = input.split(" ");
-        Position source = Position.of(inputs[1]);
-        Position target = Position.of(inputs[2]);
-
         verifyMove(inputs[1], inputs[2]);
-
-        board.move(Position.of(source), Position.of(target));
+        board.move(Position.of(inputs[1]), Position.of(inputs[2]));
     }
 
     private void verifyMove(String source, String target){
