@@ -26,12 +26,12 @@ public class Position {
      */
     private void validate(String position) {
         if (position.length() != 2)
-            throw new IllegalArgumentException("잘못된 좌표입니다.");
+            throw new IllegalArgumentException("잘못된 좌표입니다");
         if (!isValidFile(position.charAt(0))) {
-            throw new IllegalArgumentException("잘못된 좌표입니다.");
+            throw new IllegalArgumentException("잘못된 좌표입니다");
         }
         if (!isValidRank(position.charAt(1))) {
-            throw new IllegalArgumentException("잘못된 좌표입니다.");
+            throw new IllegalArgumentException("잘못된 좌표입니다");
         }
     }
 

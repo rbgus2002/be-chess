@@ -29,7 +29,7 @@ public class Rank {
                 setFirstLineOf(Color.BLACK);
                 break;
             default:
-                throw new IllegalArgumentException("잘못된 line 입력 입니다.");
+                throw new IllegalArgumentException("잘못된 line 입력 입니다");
         }
     }
 

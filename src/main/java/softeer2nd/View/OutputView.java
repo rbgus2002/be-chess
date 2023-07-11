@@ -1,7 +1,7 @@
 package softeer2nd.View;
 
-//import softeer2nd.chess.Board;
 import softeer2nd.domain.chess.Board;
+import softeer2nd.domain.chess.Turn;
 import softeer2nd.utils.StringUtils;
 
 public class OutputView {
@@ -18,6 +18,13 @@ public class OutputView {
         System.out.println("Game End!");
     }
 
+    public void printEnd(Turn turn){
+        StringBuilder sb = new StringBuilder();
+        sb.append(StringUtils.appendNewLine(turn.getNowTurn() + "의 승리입니다"));
+        sb.append(StringUtils.appendNewLine("Game End!"));
+        System.out.print(sb);
+    }
+
     public void printBoard(Board board){
         System.out.println(board.showBoard());
     }
@@ -26,11 +33,14 @@ public class OutputView {
         StringBuilder sb = new StringBuilder();
         sb.append("[ERROR] : ");
         sb.append(StringUtils.appendNewLine((e.getMessage())));
-        sb.append("명령어를 다시 입력해주세요");
-        System.out.println(sb);
+        sb.append(StringUtils.appendNewLine("명령어를 다시 입력해주세요"));
+        System.out.print(sb);
     }
 
-    public void printContinue() {
-        System.out.println("계속 진행하세요");
+    public void printNowTurn(Turn turn) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(turn.getNowTurn());
+        sb.append(StringUtils.appendNewLine(" 차례 입니다"));
+        System.out.print(sb);
     }
 }

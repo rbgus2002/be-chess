@@ -56,7 +56,7 @@ public class Board {
     private void validateMove(Position source, Position target){
         Piece sourcePiece = findPieceByPosition(source);
         if(!sourcePiece.canMove(source, target, this)){
-            throw new IllegalArgumentException(sourcePiece + "는 " + target + "으로 움직일 수 없습니다.");
+            throw new IllegalArgumentException(sourcePiece + "는 " + target + "으로 움직일 수 없습니다");
         }
     }
 

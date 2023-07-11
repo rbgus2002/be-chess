@@ -19,7 +19,7 @@ public class Command {
         if (input.equals(START) || input.equals(END) || input.startsWith(MOVE)) {
             return;
         }
-        throw new IllegalArgumentException("잘못된 명령어입니다.");
+        throw new IllegalArgumentException("잘못된 명령어입니다");
     }
 
     public boolean isStart(){
