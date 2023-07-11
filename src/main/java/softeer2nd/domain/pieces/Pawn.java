@@ -23,18 +23,11 @@ public class Pawn extends Piece {
         return (getColor() == WHITE) ? rank == 2 : rank == 7;
     }
 
-    /**
-     * Black : 하단으로 1칸 or 움직인적 없으면 하단으로 2칸 or 적 존재하면 대각 하단으로 한칸
-     * White : 상단으로 1칸 or 움직인적 없으면 상단으로 2칸 or 적 존재하면 대각 상단으로 한칸
-     */
-    /**
-     * 1. 대각선 검사
-     * 2. target 위치에 빈칸인지 검사
-     */
     @Override
     public boolean canMove(Position source, Position target, Board board) {
-        if(verifyDiagonal(source, target, board)){
-            return true;
+        if(source.isDiagonal(target)){
+            return Math.abs(source.getFileDistance(target)) == DISTANCE &&
+                    board.findPieceByPosition(source).isEnemy(board.findPieceByPosition(target));
         }
         if(!board.findPieceByPosition(target).isBlank()){
             return false;
@@ -47,14 +40,6 @@ public class Pawn extends Piece {
         }
 
         return false;
-    }
-
-    private boolean verifyDiagonal(Position source, Position target, Board board) {
-        if (!source.isDiagonal(target)) {
-            return false;
-        }
-        return Math.abs(source.getFileDistance(target)) == DISTANCE &&
-                board.findPieceByPosition(source).isEnemy(board.findPieceByPosition(target));
     }
 
     private boolean verifyFirstMove(Position source, Position target) {

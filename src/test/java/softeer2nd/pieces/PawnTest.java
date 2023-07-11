@@ -15,14 +15,16 @@ class PawnTest extends Board {
     void canMoveToDiagonalWhenExistEnemy() {
         // given
         board.initializeEmpty();
-        board.insertPiece(A2, Pawn.from(WHITE));
-        board.insertPiece(B3, Pawn.from(BLACK));
+        board.insertPiece(B2, Pawn.from(WHITE));
+        board.insertPiece(C3, Pawn.from(BLACK));
 
         // when
-        boolean move = Pawn.from(WHITE).canMove(A2, B3, board);
+        boolean moveSuccess = Pawn.from(WHITE).canMove(B2, C3, board);
+        boolean moveFail = Pawn.from(WHITE).canMove(B2, A3, board);
 
         // then
-        assertTrue(move);
+        assertTrue(moveSuccess);
+        assertFalse(moveFail);
     }
 
     @Test
