@@ -42,8 +42,9 @@ public class Pawn extends Piece {
         if(verifyFirstMove(source, target)){
             return true;
         }
-
-        // TODO : 팀 별로 한칸 움직일 수 있는 경우의 수 검증만 구현
+        if(verifyMove(source, target, board)){
+            return true;
+        }
 
         return false;
     }
@@ -52,7 +53,7 @@ public class Pawn extends Piece {
         if (!source.isDiagonal(target)) {
             return false;
         }
-        return source.getFileDistance(target) == DISTANCE &&
+        return Math.abs(source.getFileDistance(target)) == DISTANCE &&
                 board.findPieceByPosition(source).isEnemy(board.findPieceByPosition(target));
     }
 
@@ -61,6 +62,15 @@ public class Pawn extends Piece {
             return false;
         }
         return source.isVertical(target) &&
-                (source.getFileDistance(target) == DISTANCE || source.getFileDistance(target) == DISTANCE + 1);
+                (Math.abs(source.getFileDistance(target)) == DISTANCE || Math.abs(source.getFileDistance(target)) == DISTANCE + 1);
+    }
+
+    private boolean verifyMove(Position source, Position target, Board board) {
+        if(board.findPieceByPosition(source).isBlack()){
+            return source.getFileDistance(target) == -DISTANCE;
+        }
+        else{
+            return source.getFileDistance(target) == DISTANCE;
+        }
     }
 }
