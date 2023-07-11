@@ -1,12 +1,13 @@
 package softeer2nd.pieces;
 
 import org.junit.jupiter.api.*;
-import softeer2nd.chess.Board;
+import softeer2nd.domain.chess.Board;
+import softeer2nd.domain.pieces.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static softeer2nd.chess.Color.BLACK;
-import static softeer2nd.chess.Color.WHITE;
+import static softeer2nd.domain.chess.Color.BLACK;
+import static softeer2nd.domain.chess.Color.WHITE;
 import static softeer2nd.utils.PositionFactory.*;
 
 

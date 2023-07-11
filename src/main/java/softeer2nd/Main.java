@@ -1,6 +1,6 @@
 package softeer2nd;
 
-import softeer2nd.manager.Game;
+import softeer2nd.domain.chess.Game;
 
 public class Main {
     public static void main(String[] args) {

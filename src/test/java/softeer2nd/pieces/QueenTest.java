@@ -3,12 +3,12 @@ package softeer2nd.pieces;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import softeer2nd.chess.Color;
-import softeer2nd.chess.Position;
+import softeer2nd.domain.pieces.Piece;
+import softeer2nd.domain.pieces.Queen;
 import softeer2nd.utils.Board;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static softeer2nd.chess.Color.WHITE;
+import static softeer2nd.domain.chess.Color.WHITE;
 import static softeer2nd.utils.PositionFactory.*;
 
 class QueenTest extends Board {

@@ -1,12 +1,10 @@
-package softeer2nd.chess;
+package softeer2nd.domain.chess;
 
+import softeer2nd.domain.pieces.*;
 import softeer2nd.pieces.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static softeer2nd.chess.Color.BLACK;
-import static softeer2nd.chess.Color.WHITE;
 
 public class Rank {
     private List<Piece> pieces = new ArrayList<>();
@@ -14,10 +12,10 @@ public class Rank {
     private Rank(int line) {
         switch (line) {
             case 1:
-                setFirstLineOf(WHITE);
+                setFirstLineOf(Color.WHITE);
                 break;
             case 2:
-                setSecondLineOf(WHITE);
+                setSecondLineOf(Color.WHITE);
                 break;
             case 3:
             case 4:
@@ -26,10 +24,10 @@ public class Rank {
                 setBlankLine();
                 break;
             case 7:
-                setSecondLineOf(BLACK);
+                setSecondLineOf(Color.BLACK);
                 break;
             case 8:
-                setFirstLineOf(BLACK);
+                setFirstLineOf(Color.BLACK);
                 break;
             default:
                 throw new IllegalArgumentException("잘못된 line 입력 입니다.");

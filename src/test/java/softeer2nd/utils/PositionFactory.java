@@ -1,6 +1,6 @@
 package softeer2nd.utils;
 
-import softeer2nd.chess.Position;
+import softeer2nd.domain.chess.Position;
 
 public class PositionFactory {
     public static final Position A1 = Position.of("a1");

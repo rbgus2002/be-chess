@@ -2,11 +2,12 @@ package softeer2nd.pieces;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import softeer2nd.chess.Color;
+import softeer2nd.domain.pieces.Knight;
+import softeer2nd.domain.pieces.Pawn;
 import softeer2nd.utils.Board;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static softeer2nd.chess.Color.WHITE;
+import static softeer2nd.domain.chess.Color.WHITE;
 import static softeer2nd.utils.PositionFactory.*;
 
 class KnightTest extends Board {

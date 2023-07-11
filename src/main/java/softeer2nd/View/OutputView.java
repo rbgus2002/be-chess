@@ -1,7 +1,7 @@
-package softeer2nd.manager;
+package softeer2nd.View;
 
 //import softeer2nd.chess.Board;
-import softeer2nd.chess.Board;
+import softeer2nd.domain.chess.Board;
 import softeer2nd.utils.StringUtils;
 
 public class OutputView {

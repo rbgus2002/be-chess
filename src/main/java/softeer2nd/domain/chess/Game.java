@@ -1,7 +1,7 @@
-package softeer2nd.manager;
+package softeer2nd.domain.chess;
 
-import softeer2nd.chess.Board;
-import softeer2nd.chess.Position;
+import softeer2nd.View.InputView;
+import softeer2nd.View.OutputView;
 
 public class Game {
     private final String START = "start";

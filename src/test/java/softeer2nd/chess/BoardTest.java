@@ -4,11 +4,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import softeer2nd.pieces.*;
+import softeer2nd.domain.chess.Board;
+import softeer2nd.domain.chess.Position;
+import softeer2nd.domain.pieces.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static softeer2nd.chess.Color.BLACK;
-import static softeer2nd.chess.Color.WHITE;
+import static softeer2nd.domain.chess.Color.BLACK;
+import static softeer2nd.domain.chess.Color.WHITE;
 import static softeer2nd.utils.PositionFactory.*;
 import static softeer2nd.utils.StringUtils.appendNewLine;
 

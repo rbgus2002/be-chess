@@ -1,8 +1,8 @@
-package softeer2nd.pieces;
+package softeer2nd.domain.pieces;
 
-import softeer2nd.chess.Board;
-import softeer2nd.chess.Color;
-import softeer2nd.chess.Position;
+import softeer2nd.domain.chess.Board;
+import softeer2nd.domain.chess.Color;
+import softeer2nd.domain.chess.Position;
 
 public class King extends Piece {
     private final int DISTANCE = 1;
