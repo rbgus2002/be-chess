@@ -84,7 +84,7 @@ class RookTest extends Board {
             board.insertPiece(A3, Pawn.from(WHITE));
 
             // then
-            assertThrows(IllegalArgumentException.class, () -> board.move(A1, A5));
+            assertThrows(RuntimeException.class, () -> board.move(A1, A5));
         }
     }
 }

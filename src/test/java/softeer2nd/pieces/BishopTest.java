@@ -52,7 +52,7 @@ class BishopTest extends Board {
             board.insertPiece(C2, Pawn.from(WHITE));
 
             // then
-            assertThrows(IllegalArgumentException.class, () -> board.move(B1, D3));
+            assertThrows(RuntimeException.class, () -> board.move(B1, D3));
         }
     }
 }

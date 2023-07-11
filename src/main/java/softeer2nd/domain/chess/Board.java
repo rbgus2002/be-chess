@@ -2,6 +2,7 @@ package softeer2nd.domain.chess;
 
 import softeer2nd.domain.pieces.Blank;
 import softeer2nd.domain.pieces.Piece;
+import softeer2nd.exception.InvalidPositionException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +57,7 @@ public class Board {
     private void validateMove(Position source, Position target){
         Piece sourcePiece = findPieceByPosition(source);
         if(!sourcePiece.canMove(source, target, this)){
-            throw new IllegalArgumentException(sourcePiece + "는 " + target + "으로 움직일 수 없습니다");
+            throw new InvalidPositionException(sourcePiece + "는 " + target + "으로 움직일 수 없습니다");
         }
     }
 
@@ -73,7 +74,7 @@ public class Board {
         for(int i = 0; i < maxSide - 1; i++){
             now = now.calculateNextPosition(nextRank, nextFile);
             if(!findPieceByPosition(now).isBlank()){
-                throw new IllegalArgumentException(source + "와 " + target + " 사이에 다른 기물이 존재할 수 없습니다");
+                throw new InvalidPositionException(source + "와 " + target + " 사이에 다른 기물이 존재할 수 없습니다");
             }
         }
     }

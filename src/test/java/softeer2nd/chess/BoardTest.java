@@ -55,11 +55,11 @@ class BoardTest {
             board.initialize();
 
             // then
-            assertThrows(IllegalArgumentException.class, () -> board.findPieceByPosition(Position.of(invalidPoint1)));
-            assertThrows(IllegalArgumentException.class, () -> board.findPieceByPosition(Position.of(invalidPoint2)));
-            assertThrows(IllegalArgumentException.class, () -> board.findPieceByPosition(Position.of(invalidPoint3)));
-            assertThrows(IllegalArgumentException.class, () -> board.findPieceByPosition(Position.of(invalidPoint4)));
-            assertThrows(IllegalArgumentException.class, () -> board.findPieceByPosition(Position.of(invalidPoint5)));
+            assertThrows(RuntimeException.class, () -> board.findPieceByPosition(Position.of(invalidPoint1)));
+            assertThrows(RuntimeException.class, () -> board.findPieceByPosition(Position.of(invalidPoint2)));
+            assertThrows(RuntimeException.class, () -> board.findPieceByPosition(Position.of(invalidPoint3)));
+            assertThrows(RuntimeException.class, () -> board.findPieceByPosition(Position.of(invalidPoint4)));
+            assertThrows(RuntimeException.class, () -> board.findPieceByPosition(Position.of(invalidPoint5)));
         }
 
         @Test
@@ -118,7 +118,7 @@ class BoardTest {
             board.insertPiece(D2, Pawn.from(WHITE));
 
             // then
-            assertThrows(IllegalArgumentException.class, () -> board.move(D1, D4));
+            assertThrows(RuntimeException.class, () -> board.move(D1, D4));
         }
 
         @Test
@@ -128,7 +128,7 @@ class BoardTest {
             board.initializeEmpty();
 
             // then
-            assertThrows(IllegalArgumentException.class, () -> board.move(D1, D4));
+            assertThrows(RuntimeException.class, () -> board.move(D1, D4));
         }
     }
 

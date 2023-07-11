@@ -1,5 +1,7 @@
 package softeer2nd.domain.chess;
 
+import softeer2nd.exception.InvalidPositionException;
+
 public class Position {
     private int file;
     private int rank;
@@ -25,13 +27,14 @@ public class Position {
      * 3. 마지막 글자가 '1' ~ '8'가 아닌 경우
      */
     private void validate(String position) {
-        if (position.length() != 2)
-            throw new IllegalArgumentException("잘못된 좌표입니다");
+        if (position.length() != 2){
+            throw new InvalidPositionException("잘못된 좌표입니다");
+        }
         if (!isValidFile(position.charAt(0))) {
-            throw new IllegalArgumentException("잘못된 좌표입니다");
+            throw new InvalidPositionException("잘못된 좌표입니다");
         }
         if (!isValidRank(position.charAt(1))) {
-            throw new IllegalArgumentException("잘못된 좌표입니다");
+            throw new InvalidPositionException("잘못된 좌표입니다");
         }
     }
 

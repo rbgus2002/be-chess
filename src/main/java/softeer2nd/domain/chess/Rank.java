@@ -1,6 +1,7 @@
 package softeer2nd.domain.chess;
 
 import softeer2nd.domain.pieces.*;
+import softeer2nd.exception.InvalidInputException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class Rank {
                 setFirstLineOf(Color.BLACK);
                 break;
             default:
-                throw new IllegalArgumentException("잘못된 line 입력 입니다");
+                throw new InvalidInputException("잘못된 line 입력 입니다");
         }
     }
 

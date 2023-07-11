@@ -1,5 +1,7 @@
 package softeer2nd.utils;
 
+import softeer2nd.exception.IllegalCommandException;
+
 public class Command {
     private final String START = "start";
     private final String END = "end";
@@ -19,7 +21,7 @@ public class Command {
         if (input.equals(START) || input.equals(END) || input.startsWith(MOVE)) {
             return;
         }
-        throw new IllegalArgumentException("잘못된 명령어입니다");
+        throw new IllegalCommandException("잘못된 명령어입니다");
     }
 
     public boolean isStart(){
@@ -36,14 +38,14 @@ public class Command {
 
     public String getSource(){
         if(!isMove()){
-            throw new IllegalArgumentException("move 명령어가 아니면 해당 함수를 호출할 수 없습니다");
+            throw new IllegalCommandException("move 명령어가 아니면 해당 함수를 호출할 수 없습니다");
         }
         return input.split(" ")[1];
     }
 
     public String getTarget() {
         if(!isMove()){
-            throw new IllegalArgumentException("move 명령어가 아니면 해당 함수를 호출할 수 없습니다");
+            throw new IllegalCommandException("move 명령어가 아니면 해당 함수를 호출할 수 없습니다");
         }
         return input.split(" ")[2];
     }

@@ -3,6 +3,8 @@ package softeer2nd.domain.chess;
 import softeer2nd.View.InputView;
 import softeer2nd.View.OutputView;
 import softeer2nd.domain.pieces.Piece;
+import softeer2nd.exception.IllegalTurnException;
+import softeer2nd.exception.InvalidPositionException;
 import softeer2nd.utils.Command;
 
 public class Game {
@@ -67,7 +69,7 @@ public class Game {
         }
 
         if(!turn.validateTurn(sourcePiece)){
-            throw new IllegalArgumentException("선택한 기물의 차례가 아닙니다");
+            throw new IllegalTurnException("선택한 기물의 차례가 아닙니다");
         }
     }
 
@@ -78,13 +80,13 @@ public class Game {
 
     private void verifySameSourceAndTarget(String source, String target) {
         if (source.equals(target)) {
-            throw new IllegalArgumentException("시작점과 동일한 위치로 이동할 수 없습니다");
+            throw new InvalidPositionException("시작점과 동일한 위치로 이동할 수 없습니다");
         }
     }
 
     private void verifyTarget(Position source, Position target) {
         if (board.findPieceByPosition(source).isTeam(board.findPieceByPosition(target))) {
-            throw new IllegalArgumentException("같은 팀 기물의 위치로 이동할 수 없습니다");
+            throw new InvalidPositionException("같은 팀 기물의 위치로 이동할 수 없습니다");
         }
     }
 
