@@ -11,7 +11,7 @@ import static softeer2nd.domain.chess.Color.*;
 public abstract class Piece {
     private final Color color;
     protected final String representation;
-    private final double score; // TODO : 삭제 고려
+    private final double score;
 
     public Piece(Color color, String representation, double score) {
         this.color = color;
