@@ -6,7 +6,7 @@ import softeer2nd.domain.chess.Position;
 
 public class Bishop extends Piece{
     private Bishop(Color color){
-        super(color, "b", 3.0);
+        super(color, "b");
     }
 
     public static Bishop from(Color color){

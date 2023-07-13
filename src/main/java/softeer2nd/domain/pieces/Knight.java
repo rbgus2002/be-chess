@@ -7,7 +7,7 @@ import softeer2nd.domain.chess.Position;
 public class Knight extends Piece{
     private final int DISTANCE = 3;
     private Knight(Color color){
-        super(color, "n", 2.5);
+        super(color, "n");
     }
 
     public static Knight from(Color color){

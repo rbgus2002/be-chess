@@ -7,11 +7,10 @@ import softeer2nd.domain.chess.Position;
 import static softeer2nd.domain.chess.Color.WHITE;
 
 public class Pawn extends Piece {
-    private static final double SCORE = 1.0;
     private final int DISTANCE = 1;
 
     private Pawn(Color color) {
-        super(color, "p", SCORE);
+        super(color, "p");
     }
 
     public static Pawn from(Color color) {

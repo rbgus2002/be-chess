@@ -11,12 +11,10 @@ import static softeer2nd.domain.chess.Color.*;
 public abstract class Piece {
     private final Color color;
     protected final String representation;
-    private final double score;
 
-    public Piece(Color color, String representation, double score) {
+    Piece(Color color, String representation) {
         this.color = color;
         this.representation = setRepresentation(representation);
-        this.score = score;
     }
 
     private String setRepresentation(String representation) {

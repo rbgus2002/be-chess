@@ -8,7 +8,7 @@ import static softeer2nd.domain.chess.Color.NONE;
 
 public class Blank extends Piece{
     private Blank(Color color){
-        super(color, ".", 0);
+        super(color, ".");
     }
 
     public static Blank create(){

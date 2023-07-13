@@ -49,6 +49,7 @@ public class Game {
         }
         if(now.isMove()){
             move(now);
+            turn.nextTurn();
         }
     }
 
@@ -59,7 +60,6 @@ public class Game {
         verifyMove(now.getSource(), now.getTarget());
         board.move(Position.of(now.getSource()), Position.of(now.getTarget()));
         checkFinishGame(originalTarget);
-        turn.nextTurn();
     }
 
     private void verifyTurn(Position source) {

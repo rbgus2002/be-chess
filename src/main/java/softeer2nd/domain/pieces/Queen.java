@@ -6,7 +6,7 @@ import softeer2nd.domain.chess.Position;
 
 public class Queen extends Piece{
     private Queen(Color color){
-        super(color, "q", 9.0);
+        super(color, "q");
     }
 
     public static Queen from(Color color){

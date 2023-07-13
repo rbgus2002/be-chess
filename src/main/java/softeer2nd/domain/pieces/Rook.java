@@ -6,7 +6,7 @@ import softeer2nd.domain.chess.Position;
 
 public class Rook extends Piece{
     private Rook(Color color){
-        super(color, "r", 5.0);
+        super(color, "r");
     }
 
     public static Rook from(Color color){

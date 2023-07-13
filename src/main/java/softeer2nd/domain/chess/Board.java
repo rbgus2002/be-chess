@@ -12,7 +12,7 @@ import static softeer2nd.utils.StringUtils.*;
 public class Board {
     public final static int SIZE = 8;
 
-    private List<Rank> board = new ArrayList<>();
+    private final List<Rank> board = new ArrayList<>();
 
     public Board() {
     }

@@ -24,10 +24,6 @@ public class Command {
         throw new IllegalCommandException("잘못된 명령어입니다");
     }
 
-    public boolean isStart(){
-        return input.equals(START);
-    }
-
     public boolean isMove(){
         return input.startsWith(MOVE);
     }
